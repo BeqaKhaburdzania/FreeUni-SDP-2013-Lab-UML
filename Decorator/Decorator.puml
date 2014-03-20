@@ -1,0 +1,40 @@
+@startuml
+
+    Employee          <|-- Engineer
+    Employee          <|-- ResponsibleWorker
+    ResponsibleWorker <|-- ProjectManager
+    ResponsibleWorker <|-- AdministrativeManager
+
+    interface Employee {
+        + String getName()
+        + String getOffice()
+        + void whoIs()
+    }
+
+    class ResponsibleWorker {
+        # Employee responsible
+    }
+
+    class ProjectManager {
+        - String project
+    }
+
+    class AdministrativeManager {
+        - void sayIamBoss()
+    }
+
+    class DecoratorExample {
+        {static} void main(String[] args)
+    }
+
+    ' Personal Comments :)
+    ' --------------------
+    ' Do I have to do anything else with Engineer class?
+    ' Should I specify constructor arguments?
+    ' What is return value convention?
+    ' Do I have to comment anything?
+    ' Shouldn't class implementing interface have same methods in graphical representation?
+    ' Should I specify which methods are overridden?
+    ' Should there be any sequence diagrams?
+
+@enduml
