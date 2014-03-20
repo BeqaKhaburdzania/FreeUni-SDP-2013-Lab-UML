@@ -7,8 +7,20 @@ Most of the code is taken from the book "GoF's Design Patterns in Java" by "Fran
 may be freely downloaded at: (http://eii.ucv.cl/pers/guidi/designpatterns.htm).
 
 ----------------------------------------------------------------------------------------------------------
-Following patterns 
+Following patterns:
+* Visitor
+* Template Method
+* Strategy
+* State
+* Observer
+* Memento
+* Factory Method
 
+are computer assisted translations from c# using CS2J (http://www.cs2j.com)
+Original sources are published under Microsoft Public License (Ms-PL) at csharpdesignpatterns.codeplex.com
+(c) 2013 Jason Oliveira, George Mamaladze
+
+----------------------------------------------------------------------------------------------------------
 The repository was created and extended by Massimo Gengarelli and is currently used at Alma Mater Studiorum University in Italy. 
 
 Contributions made here can be later pulled into the original repository.
