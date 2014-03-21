@@ -11,14 +11,5 @@ target/
 .project
 .externalToolBuilders
 *.orig
-.gwt
-.bat
-SSTS.db
-console/src/main/webapp/META-INF/
 lib/
-ssts.log*
-terminal-software-jnlp-folder
-versions/
-*.dll
-*/*.dll
 
