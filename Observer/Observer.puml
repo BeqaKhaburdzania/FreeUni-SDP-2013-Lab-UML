@@ -1,4 +1,5 @@
 @startuml
+
 	interface IObservable as "IObservable<TMessage>"
 	IObservable : + void subscribe(IObserver<TMessage> observer)
 	IObservable : + void unsubscribe(IObserver<TMessage> observer)
@@ -27,8 +28,14 @@
 	TimePulseObservable : + TimePulseObservable(int seconds)
 	hide TimePulseObservable field
 	
-	class Exception
-	hide Exception members
-	
 	Observable -> "* "IObserver
+	
+	class ObserverSubscribtionException extends IllegalStateException
+	ObserverSubscribtionException : + ObserverSubscribtionException(String message)
+	hide ObserverSubscribtionException fields
+	hide IllegalStateException member
+	
+	class Program 
+	Program : -void main(String[] args)
+	hide Program field
 @enduml
