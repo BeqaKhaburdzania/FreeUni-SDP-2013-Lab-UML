@@ -10,7 +10,7 @@
 	Observable : # void notifyObservers(TMessage message)
 	Observable : + void subscribe(IObserver<TMessage> observer)
 	Observable : + void unsubscribe(IObserver<TMessage> observer)
-	Observable - "0..*" IObserver
+	Observable "1" o-- "0..*" IObserver
 	hide Observable field
 
 	interface IObserver as "IObserver<TMessage>"
