@@ -6,11 +6,12 @@
 	hide IObservable field
 
 	class Observable implements IObservable
-	Observable : - HashSet<IObserver<TMessage>> m_Observers
 	Observable : # Observable()
 	Observable : # void notifyObservers(TMessage message)
 	Observable : + void subscribe(IObserver<TMessage> observer)
 	Observable : + void unsubscribe(IObserver<TMessage> observer)
+	Observable - "0..*" IObserver
+	hide Observable field
 
 	interface IObserver as "IObserver<TMessage>"
 	IObserver : + void onNotified(TMessage message) 
@@ -27,8 +28,6 @@
 	class TimePulseObservable extends Observable
 	TimePulseObservable : + TimePulseObservable(int seconds)
 	hide TimePulseObservable field
-
-	Observable -> "* "IObserver
 
 	class ObserverSubscribtionException extends IllegalStateException
 	ObserverSubscribtionException : + ObserverSubscribtionException(String message)
