@@ -1,0 +1,48 @@
+@startuml
+
+    Employee          <|-- Engineer
+    Employee          <|-- ResponsibleWorker
+    ResponsibleWorker  *-- Employee
+    ResponsibleWorker <|-- ProjectManager
+    ResponsibleWorker <|-- AdministrativeManager
+
+    hide Employee              fields
+    hide AdministrativeManager fields
+    hide DecoratorExample      fields
+    hide Engineer              methods
+    hide ProjectManager        methods
+    hide ResponsibleWorker     members
+
+    interface Employee {
+        + String getName()
+        + String getOffice()
+        + void whoIs()
+    }
+
+    class Engineer {
+        - String name
+        - String office
+    }
+
+    class ProjectManager {
+        - String project
+    }
+
+    class AdministrativeManager {
+        - void sayIamBoss()
+    }
+
+    class DecoratorExample {
+        {static} void main(String[] args)
+    }
+
+    ' Personal Comments
+    ' -----------------
+    ' isn't Nikoloz Pachuashvili's decorator example much better? https://github.com/nikoloz-pachuashvili/Gelateria
+    ' aggregation or composition? write it in wiki, probably composition
+    ' decorators and scala traits
+    ' why is ResponsibleWorker an abstract class?
+    '    not to use directly new ResponsibleWorker?
+    '    in that case why is responsible not private but protected?
+
+@enduml
