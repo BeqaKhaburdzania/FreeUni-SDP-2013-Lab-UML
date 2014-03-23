@@ -11,7 +11,7 @@ public class HTTPFileTransmissionStrategy
 		super(destination);
 	}
 
-	@Override
+	
 	public void transmit(List<File> files) {
 		log(files);
 	}

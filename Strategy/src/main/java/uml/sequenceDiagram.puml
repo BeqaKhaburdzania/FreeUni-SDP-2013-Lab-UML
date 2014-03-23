@@ -1,0 +1,14 @@
+@startuml
+	actor main
+
+	create FileTransmissionStrategy
+	main -> FileTransmissionStrategy: new	
+	
+	
+	create FileTransmissionContext
+	main -> FileTransmissionContext: new(FileTransmissionStrategy)
+	main -> FileTransmissionContext : transmit(file)
+	
+	activate FileTransmissionContext
+	
+@enduml
