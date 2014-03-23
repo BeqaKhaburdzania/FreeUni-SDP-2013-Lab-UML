@@ -1,0 +1,15 @@
+@startuml
+
+actor main
+
+create CloneableTime
+main ->CloneableTime :new
+
+
+main -> CloneableTime :setTime(hr, min, sec)
+
+main -> SchedulerC :calculateEnd(cloneableTime,hr)
+
+main ->System :out.println(time)
+
+@enduml

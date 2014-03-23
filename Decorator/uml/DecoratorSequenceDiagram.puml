@@ -1,0 +1,21 @@
+@startuml
+
+    actor main
+    main -> Engineer: new
+    main -> Engineer: whoIs
+
+    main -> AdministrativeManager: new(willBeFamous)
+    main -> AdministrativeManager: whoIs
+
+    main -> ProjectManager: new(willBeFamous, "Scotland Liberation Army")
+    main -> ProjectManager: whoIs
+
+    main -> ProjectManager: new(willBeFamous, "Freedom for Scotland")
+    main -> ProjectManager: whoIs
+
+    ' Personal Comments
+    ' -----------------
+    ' how to handle instance variables?
+    ' should I make separate sequences or just one?
+
+@enduml
