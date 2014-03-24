@@ -16,7 +16,6 @@
 
     AdministrativeManager -> Engineer: whoIs
     deactivate AdministrativeManager
-    destroy AdministrativeManager
 
     create ProjectManager
     main -> ProjectManager: new(engineer)
@@ -26,7 +25,6 @@
 
     ProjectManager -> Engineer: whoIs
     deactivate ProjectManager
-    destroy ProjectManager
 
     main -> ProjectManager: new(engineer)
 
@@ -35,10 +33,8 @@
 
     ProjectManager -> Engineer: whoIs
     deactivate ProjectManager
-    destroy ProjectManager
 
     deactivate Engineer
-    destroy Engineer
 
     main -> Engineer: new
 
@@ -46,7 +42,6 @@
     main -> Engineer: whoIs
 
     deactivate Engineer
-    destroy Engineer
 
     'I deliberately omitted ResponsibleWorker class. If you ask me, that class is useless.
 
