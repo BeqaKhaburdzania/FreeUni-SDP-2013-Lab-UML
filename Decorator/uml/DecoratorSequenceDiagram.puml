@@ -1,21 +1,53 @@
 @startuml
 
     actor main
+
+    create Engineer
     main -> Engineer: new
+
+    activate Engineer
     main -> Engineer: whoIs
 
-    main -> AdministrativeManager: new(willBeFamous)
+    create AdministrativeManager
+    main -> AdministrativeManager: new(engineer)
+
+    activate AdministrativeManager
     main -> AdministrativeManager: whoIs
 
-    main -> ProjectManager: new(willBeFamous, "Scotland Liberation Army")
+    AdministrativeManager -> Engineer: whoIs
+    deactivate AdministrativeManager
+    destroy AdministrativeManager
+
+    create ProjectManager
+    main -> ProjectManager: new(engineer)
+
+    activate ProjectManager
     main -> ProjectManager: whoIs
 
-    main -> ProjectManager: new(willBeFamous, "Freedom for Scotland")
+    ProjectManager -> Engineer: whoIs
+    deactivate ProjectManager
+    destroy ProjectManager
+
+    main -> ProjectManager: new(engineer)
+
+    activate ProjectManager
     main -> ProjectManager: whoIs
 
-    ' Personal Comments
-    ' -----------------
-    ' how to handle instance variables?
-    ' should I make separate sequences or just one?
+    ProjectManager -> Engineer: whoIs
+    deactivate ProjectManager
+    destroy ProjectManager
+
+    deactivate Engineer
+    destroy Engineer
+
+    main -> Engineer: new
+
+    activate Engineer
+    main -> Engineer: whoIs
+
+    deactivate Engineer
+    destroy Engineer
+
+    'I deliberately omitted ResponsibleWorker class. If you ask me, that class is useless.
 
 @enduml

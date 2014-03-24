@@ -2,7 +2,7 @@
 
     Employee          <|-- Engineer
     Employee          <|-- ResponsibleWorker
-    ResponsibleWorker  *-- Employee
+    ResponsibleWorker  o-- Employee
     ResponsibleWorker <|-- ProjectManager
     ResponsibleWorker <|-- AdministrativeManager
 
@@ -38,9 +38,6 @@
 
     ' Personal Comments
     ' -----------------
-    ' isn't Nikoloz Pachuashvili's decorator example much better? https://github.com/nikoloz-pachuashvili/Gelateria
-    ' aggregation or composition? write it in wiki, probably composition
-    ' decorators and scala traits
     ' why is ResponsibleWorker an abstract class?
     '    not to use directly new ResponsibleWorker?
     '    in that case why is responsible not private but protected?
