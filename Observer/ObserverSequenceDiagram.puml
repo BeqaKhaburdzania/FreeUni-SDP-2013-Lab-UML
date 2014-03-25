@@ -1,5 +1,6 @@
 @startuml
     actor main
+    activate main
     main -> TimePulseObservable: new TimePulseObservable(int seconds)
     activate TimePulseObservable
     TimePulseObservable ->> Timer: scheduleAtFixedRate(int seconds) 
@@ -9,9 +10,12 @@
      
     loop in every fixed seconds
 		Timer -> Observable: notifyObservers(Date date)
+		activate Observable
 		loop for each observer in Observers
 			Observable -> Observer: onNotified(Date date)
 		end
+		Observable -> Timer : notifiedObservers
+		deactivate Observable
 	end
 	 	
     main -> TimePulseWriter: new TimePulseWriter()
