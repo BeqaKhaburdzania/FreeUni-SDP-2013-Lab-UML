@@ -1,0 +1,55 @@
+@startuml
+
+
+ VideoPlayerContext o-- VideoPlayerState
+ 
+ VideoPlayerState <|.. VideoPlayerPlayingState
+ VideoPlayerState <|.. VideoPlayerStoppedState
+ 
+ VideoPlayerStoppedState-> VideoPlayerMode
+ VideoPlayerPlayingState-> VideoPlayerMode
+  
+class VideoPlayerContext {
+ - VideoPlayerState internalState
+ + VideoPlayerContext()
+ + void play()
+ + void stop()
+ + VideoPlayerMode getCurrentMode()
+ ~ void changeState(VideoPlayerState state)
+ 
+}
+
+
+
+
+
+interface  VideoPlayerState {
+	void play(VideoPlayerContext context);
+	void stop(VideoPlayerContext context);
+	VideoPlayerMode getMode();
+}
+hide VideoPlayerState fields 
+
+enum VideoPlayerMode {
+	PLAYING
+	STOPPED
+}
+hide VideoPlayerMode methods
+
+Class VideoPlayerPlayingState {
+ + void play()
+ + void stop()
+ + VideoPlayerMode getMode()
+ 
+}
+hide VideoPlayerPlayingState fields
+
+Class VideoPlayerStoppedState {
+ + void play()
+ + void stop()
+ + VideoPlayerMode getMode()
+ 
+}
+hide VideoPlayerStoppedState fields
+
+@enduml
