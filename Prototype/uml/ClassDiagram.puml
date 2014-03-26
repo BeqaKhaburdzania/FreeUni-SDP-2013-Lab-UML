@@ -1,0 +1,53 @@
+@startuml
+
+interface Cloneable{
+    Object clone()
+}
+abstract class CloneableTime {
+    + CloneableTime cloneItself()
+    ..Abstract methods..
+    +{abstract}void setTime(int hr, int min, int sec)
+    +{abstract}int getHours()
+    +{abstract}int getMinutes()
+    +{abstract}int getSeconds()
+}
+
+class SchedulerC{
+    +{static} CloneableTime calculateEnd(CloneableTime start, int hours)
+}
+
+class TimeImplementationC1{
+    -int hr
+    -int min
+    -int sec
+
+    +int getHours()
+    +int getMinutes()
+    +int getSeconds()
+    +void setTime(int hr, int min, int sec)
+}
+
+class TimeImplementationC2{
+    -int secs
+
+     +int getHours()
+     +int getMinutes()
+     +int getSeconds()
+     +void setTime(int hr, int min, int sec)
+}
+
+class PrototypeExample {
+    +{static} void main(String[] args)
+}
+
+
+
+
+Cloneable <|-- CloneableTime
+CloneableTime <|.. TimeImplementationC1
+CloneableTime <|.. TimeImplementationC2
+PrototypeExample --> "<<import>>" CloneableTime
+PrototypeExample --> "<<import>>" SchedulerC
+SchedulerC --> "<<import>>" CloneableTime
+
+@enduml

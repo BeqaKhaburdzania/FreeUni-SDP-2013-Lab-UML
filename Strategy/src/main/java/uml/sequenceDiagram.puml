@@ -1,0 +1,28 @@
+@startuml
+	actor main	
+
+	create FileTransmissionContext
+		
+	create FileTransmissionStrategy
+	
+	main -> FileTransmissionStrategy : new
+	
+	main -> FileTransmissionContext: new(strategy)
+	
+	main -> FileTransmissionContext : transmit(file)
+	
+	activate FileTransmissionContext
+	FileTransmissionContext -> FileTransmissionStrategy: transmit(file)
+		
+		activate FileTransmissionStrategy
+			FileTransmissionStrategy -> AbstractFileTransmissionStrategy: log
+			activate AbstractFileTransmissionStrategy
+			AbstractFileTransmissionStrategy -> FileTransmissionStrategy
+			deactivate AbstractFileTransmissionStrategy
+			destroy AbstractFileTransmissionStrategy
+		FileTransmissionStrategy -> FileTransmissionContext
+			
+		deactivate FileTransmissionStrategy
+	FileTransmissionContext -> main
+	deactivate FileTransmissionContext
+@enduml

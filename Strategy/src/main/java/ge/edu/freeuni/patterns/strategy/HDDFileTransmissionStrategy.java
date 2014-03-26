@@ -11,7 +11,7 @@ public class HDDFileTransmissionStrategy
 		super(destination);
 	}
 
-	@Override
+	
 	public void transmit(List<File> files) {
 		log(files);
 	}

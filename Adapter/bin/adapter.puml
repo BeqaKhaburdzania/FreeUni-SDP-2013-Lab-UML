@@ -1,0 +1,42 @@
+@startuml
+	interface Polygon{
+		+ define(float x0, float y0, float x1, float y1, String color) : void
+		+ getCoordinates() : float[]
+		+ getSurface() : float
+		+ setId(String id) : void
+		+ getId() : String
+		+ getColor() : String
+	}
+	hide Polygon fields
+	
+	class Rectangle{
+		- x0 : float 
+		- y0 : float
+		- height : float 
+		- width : float
+		- color : String
+		+ getArea() :  float
+		+ getOriginX() : float
+		+ getOriginy() : float
+		+ getOppositeCornerX() : float
+		+ getOppositeCornerY() : float
+		+ getColor() : String
+	}
+	hide Rectangle fields
+	
+	class RectangleClassAdapter {
+		- name : String
+	}
+	
+	class RectangleObjectAdapter{
+		- name : String
+		- adaptee : Rectangle
+	}
+	
+	hide RectangleClassAdapter fields
+	Polygon <|.. RectangleClassAdapter
+	Polygon <|.. RectangleObjectAdapter
+	RectangleObjectAdapter *-- Rectangle
+	Rectangle <|-- RectangleClassAdapter
+	
+@enduml

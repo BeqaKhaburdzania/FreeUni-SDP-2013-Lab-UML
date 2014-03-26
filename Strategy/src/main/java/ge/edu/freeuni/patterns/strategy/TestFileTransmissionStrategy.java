@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestFileTransmissionStrategy {
+	@SuppressWarnings("serial")
 	public static void main(String[] args) {
 		List<File> files = new ArrayList<File>() {{
 			add(new File("/path/to/file1.txt"));

@@ -1,0 +1,48 @@
+@startuml
+
+    actor main
+
+    create Engineer
+    main -> Engineer: new
+
+    activate Engineer
+    main -> Engineer: whoIs
+
+    create AdministrativeManager
+    main -> AdministrativeManager: new(engineer)
+
+    activate AdministrativeManager
+    main -> AdministrativeManager: whoIs
+
+    AdministrativeManager -> Engineer: whoIs
+    deactivate AdministrativeManager
+
+    create ProjectManager
+    main -> ProjectManager: new(engineer)
+
+    activate ProjectManager
+    main -> ProjectManager: whoIs
+
+    ProjectManager -> Engineer: whoIs
+    deactivate ProjectManager
+
+    main -> ProjectManager: new(engineer)
+
+    activate ProjectManager
+    main -> ProjectManager: whoIs
+
+    ProjectManager -> Engineer: whoIs
+    deactivate ProjectManager
+
+    deactivate Engineer
+
+    main -> Engineer: new
+
+    activate Engineer
+    main -> Engineer: whoIs
+
+    deactivate Engineer
+
+    'I deliberately omitted ResponsibleWorker class. If you ask me, that class is useless.
+
+@enduml

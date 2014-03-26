@@ -1,0 +1,41 @@
+@startuml
+    actor main
+    activate main
+    main -> TimePulseObservable: new TimePulseObservable(int seconds)
+    activate TimePulseObservable
+    TimePulseObservable ->> Timer: scheduleAtFixedRate(int seconds) 
+    activate Timer
+    TimePulseObservable --> main : TimePulseObservable
+    deactivate TimePulseObservable
+     
+    loop in every fixed seconds
+		Timer -> Observable: notifyObservers(Date date)
+		activate Observable
+		loop for each observer in Observers
+			Observable -> Observer: onNotified(Date date)
+		end
+		Observable -> Timer : notifiedObservers
+		deactivate Observable
+	end
+	 	
+    main -> TimePulseWriter: new TimePulseWriter()
+    main -> TimePulseBeeper: new TimePulseBeeper()
+     
+    main -> TimePulseObservable: subscribe(TimePulseWriter)
+    
+    activate TimePulseObservable
+    TimePulseObservable -> Observable: subscribe(TimePulseWriter)
+    activate Observable
+    deactivate Observable
+    deactivate TimePulseObservable
+    note right : add TimePulseWriter \nin Observers
+    
+    main -> TimePulseObservable: subscribe(TimePulseBeeper)
+    
+    activate TimePulseObservable
+    TimePulseObservable -> Observable: subscribe(TimePulseBeeper)
+    activate Observable
+    deactivate Observable
+    deactivate TimePulseObservable
+    note right : add TimePulseBeeper \nin Observers
+ @enduml

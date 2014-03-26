@@ -1,0 +1,51 @@
+@startuml
+
+	interface FileTransmissionStrategy {
+		~ transmit(List<File> files) : void
+	}
+		hide FileTransmissionStrategy fields
+	
+	
+	abstract class AbstractFileTransmissionStrategy {
+		# destination : URI
+		~ AbstractFileTransmissionStrategy (URI destination)
+		~ log(List<File> files) : void 
+	}
+	
+	class FileTransmissionContext {
+		+ FileTransmissionContext(FileTransmissionStrategy fileTransmissionStrategy)
+		+ transmit(List<File> files) : void
+	}
+	
+		hide FileTransmissionContext fields
+	
+	
+	class HTTPFileTransmissionStrategy {
+		+ HTTPFileTransmissionStrategy(URI destination)
+		+ transmit(List<File> files) : void
+	}
+	
+	class HDDFileTransmissionStrategy {
+		+ HTTPFileTransmissionStrategy(URI destination)
+		+ transmit(List<File> files) : void
+	}
+	
+	class FTPFileTransmissionStrategy {
+		+ HTTPFileTransmissionStrategy(URI destination)
+		+ transmit(List<File> files) : void
+	}
+		hide HTTPFileTransmissionStrategy fields
+		hide HDDFileTransmissionStrategy fields
+		hide FTPFileTransmissionStrategy fields
+	
+	
+
+	FileTransmissionStrategy <|.. AbstractFileTransmissionStrategy
+		
+	AbstractFileTransmissionStrategy <|-- FTPFileTransmissionStrategy
+	AbstractFileTransmissionStrategy <|-- HDDFileTransmissionStrategy
+	AbstractFileTransmissionStrategy <|-- HTTPFileTransmissionStrategy
+	
+	FileTransmissionContext o-- "1" FileTransmissionStrategy
+
+@enduml

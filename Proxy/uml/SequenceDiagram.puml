@@ -1,0 +1,52 @@
+@startuml
+
+title Proxy Sequence Diagram
+
+actor main
+create ProxyFileHandler
+
+main -> ProxyFileHandler : new(fileName)
+main -> ProxyFileHandler : getFileName()
+activate ProxyFileHandler
+main <-- ProxyFileHandler : fileName
+
+main -> ProxyFileHandler : getContent()
+create RealFileHandler
+    ProxyFileHandler -> RealFileHandler : new(fileName)
+    create FileInputStream
+    RealFileHandler -> FileInputStream : new (fileName)
+    RealFileHandler -> FileInputStream : available()
+    activate FileInputStream
+    RealFileHandler <-- FileInputStream : numBytes
+    RealFileHandler -> FileInputStream : read(content)
+    RealFileHandler <-- FileInputStream
+    deactivate FileInputStream
+    destroy FileInputStream
+ProxyFileHandler -> RealFileHandler : getContent()
+ProxyFileHandler <-- RealFileHandler : content
+main <-- ProxyFileHandler : content
+
+main -> ProxyFileHandler : getContent()
+ProxyFileHandler -> RealFileHandler : getContent()
+ProxyFileHandler <-- RealFileHandler : content
+main <-- ProxyFileHandler : content
+
+main -> ProxyFileHandler : getLine(requestedLine)
+ProxyFileHandler -> RealFileHandler : getLine(requestedLine)
+ProxyFileHandler <-- RealFileHandler : lineText
+note right : Accessing from \nRealFileHandler
+main <-- ProxyFileHandler : lineText
+
+main -> ProxyFileHandler : getLine(requestedLine)
+main <-- ProxyFileHandler : lineText
+note right: Accessing from \nproxy cache
+
+main -> ProxyFileHandler : getLine(otherRequestedLine)
+ProxyFileHandler -> RealFileHandler : getLine(otherRequestedLine)
+ProxyFileHandler <-- RealFileHandler : otherLineText
+note right : Accessing from \nRealFileHandler
+main <-- ProxyFileHandler : otherLineText
+
+deactivate ProxyFileHandler
+
+@enduml

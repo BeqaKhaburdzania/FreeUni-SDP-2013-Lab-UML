@@ -1,0 +1,40 @@
+@startuml
+
+	interface IObservable as "IObservable<TMessage>"
+	IObservable : + void subscribe(IObserver<TMessage> observer)
+	IObservable : + void unsubscribe(IObserver<TMessage> observer)
+	hide IObservable field
+
+	class Observable implements IObservable
+	Observable : # Observable()
+	Observable : # void notifyObservers(TMessage message)
+	Observable : + void subscribe(IObserver<TMessage> observer)
+	Observable : + void unsubscribe(IObserver<TMessage> observer)
+	Observable "1" o-- "0..*" IObserver
+	hide Observable field
+
+	interface IObserver as "IObserver<TMessage>"
+	IObserver : + void onNotified(TMessage message) 
+	hide IObserver field
+
+	class TimePulseWriter implements IObserver
+	TimePulseWriter : + void onNotified(Date message)
+	hide TimePulseWriter field
+
+	class TimePulseBeeper implements IObserver
+	TimePulseBeeper : + void onNotified(Date message)
+	hide TimePulseBeeper field
+
+	class TimePulseObservable extends Observable
+	TimePulseObservable : + TimePulseObservable(int seconds)
+	hide TimePulseObservable field
+
+	class ObserverSubscribtionException extends IllegalStateException
+	ObserverSubscribtionException : + ObserverSubscribtionException(String message)
+	hide ObserverSubscribtionException fields
+	hide IllegalStateException member
+
+	class Program 
+	Program : +{static}void main(String[] args)
+	hide Program field
+@enduml

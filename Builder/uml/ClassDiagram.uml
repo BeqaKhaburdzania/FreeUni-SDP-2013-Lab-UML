@@ -1,0 +1,86 @@
+@startuml
+
+title Builder
+
+class BuilderExample {
+	+ void main(String[] args) {static}
+}
+
+BuilderExample -right--> ERHardCodedDirector
+BuilderExample --> ERModel
+BuilderExample --> NotOrientedERBuilder
+BuilderExample --> OrientedERBuilder
+
+
+class ERHardCodedDirector {
+	+ Object getModel(ModelBuilder model) {static}
+}
+
+ERHardCodedDirector -right-> ModelBuilder
+
+abstract class ModelBuilder {
+	+ void addEntity(String name)
+	+ void addRelationship(String fromEntity, String toEntity, String relation)
+	+ void addCardMin(String entity, String relation, String value)
+	+ void addCardMax(String entity, String relation, String value)
+	+ Object getModel() {abstract}
+}
+
+OrientedERBuilder -up-|> ModelBuilder
+
+class OrientedERBuilder {
+	- Hashtable<String, String[]> relations
+	+ OrientedERBuilder()
+	+ void addRelationship(String form, String, to, String relation)
+	+ void addCardMax(String entity, String relation, String value)
+	+ Object getModel()
+}
+
+class NotOrientedERBuilder {
+	- ERmodel ermodel
+	+ NotOrientedERBuilder()
+	+ void addEntity(String name)
+	+ void addRelationship(String from, String to, String relation)
+	+ void addCardMin(String entity, String relation, String value)
+	+ void addCardMax(String entity, String relation, String value)
+	+ Object getModel()
+}
+
+NotOrientedERBuilder -up--|> ModelBuilder
+NotOrientedERBuilder -left-> ERModel
+
+class ERModel {
+	- Hashtable<String, Entity> modelEntities
+	- Hashtable<String, Relationship> modelRelations
+	+ NotOrientedERBuilder()
+	+ void addEntity(String name)
+	+ void addRelationship(String from, String to, String relation)
+	+ void addCardMin(String entity, String relation, String value)
+	+ void addCardMax(String entity, String relation, String value)
+	+ Object getModel()
+}
+
+ERModel --> Entity
+ERModel --> Relationship
+
+class Entity {
+	- String name
+	+ Entity(String name)
+}
+
+class Relationship {
+	+ String name
+	+ Entity entity1
+	+ Entity entity2
+	+ String cardMin1
+	+ String cardMax1
+	+ String cardMin2
+	+ String cardMax2
+}
+
+
+
+'Protected classes convention'
+'Difference between association and dependency'
+
+@enduml
