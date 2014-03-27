@@ -45,18 +45,18 @@ main -> ERHardCodedDirector : getModel(notOrientedERBuilder)
 
 activate ERHardCodedDirector
 
-ERHardCodedDirector -> NotOrientedERBuilder : addEntity("Student")
-NotOrientedERBuilder -> ERModel : addEntity("Student")
-
-ERHardCodedDirector -> NotOrientedERBuilder : addEntity("University")
-NotOrientedERBuilder -> ERModel : addEntity("University")
-
-note right
+note left ERModel
 Relationship between NotOrientedERBuilder and ERModel
 kind of reminds me of Adapter pattern.
 NotOrientedERBuilder is adapter class for ERModel to
 resemble ModelBuilder.
 end note
+
+ERHardCodedDirector -> NotOrientedERBuilder : addEntity("Student")
+NotOrientedERBuilder -> ERModel : addEntity("Student")
+
+ERHardCodedDirector -> NotOrientedERBuilder : addEntity("University")
+NotOrientedERBuilder -> ERModel : addEntity("University")
 
 ERHardCodedDirector -> NotOrientedERBuilder : addRelationship("Student", "University", "Studies at")
 NotOrientedERBuilder -> ERModel : addRelationship("Student", "University", "Studies at")
