@@ -78,9 +78,4 @@ class Relationship {
 	+ String cardMax2
 }
 
-
-
-'Protected classes convention'
-'Difference between association and dependency'
-
 @enduml

@@ -1,0 +1,86 @@
+@startuml
+
+actor main
+
+create OrientedERBuilder
+main -> OrientedERBuilder : new
+
+note over OrientedERBuilder
+OrientedERBuilder is implementation of
+<u>ModelBuilder</u> abstract class.
+end note
+
+main -> ERHardCodedDirector : getModel(orientedERBuilder)
+
+
+
+activate ERHardCodedDirector
+
+ERHardCodedDirector -> OrientedERBuilder : addEntity("Student")
+
+note right
+Here more ModelBuilder
+setters are called.
+end note
+
+ERHardCodedDirector -> OrientedERBuilder : addEntity("University")
+ERHardCodedDirector -> OrientedERBuilder : addRelationship("Student", "University", "Studies at")
+ERHardCodedDirector -> OrientedERBuilder : getModel()
+
+ERHardCodedDirector --> main
+
+deactivate ERHardCodedDirector
+
+
+
+create NotOrientedERBuilder
+main -> NotOrientedERBuilder : new
+
+create ERModel
+NotOrientedERBuilder -> ERModel : new
+
+main -> ERHardCodedDirector : getModel(notOrientedERBuilder)
+
+
+
+activate ERHardCodedDirector
+
+ERHardCodedDirector -> NotOrientedERBuilder : addEntity("Student")
+NotOrientedERBuilder -> ERModel : addEntity("Student")
+
+ERHardCodedDirector -> NotOrientedERBuilder : addEntity("University")
+NotOrientedERBuilder -> ERModel : addEntity("University")
+
+note right
+Relationship between NotOrientedERBuilder and ERModel
+kind of reminds me of Adapter pattern.
+NotOrientedERBuilder is adapter class for ERModel to
+resemble ModelBuilder.
+end note
+
+ERHardCodedDirector -> NotOrientedERBuilder : addRelationship("Student", "University", "Studies at")
+NotOrientedERBuilder -> ERModel : addRelationship("Student", "University", "Studies at")
+
+ERHardCodedDirector -> NotOrientedERBuilder : getModel()
+NotOrientedERBuilder --> ERHardCodedDirector : erModel
+ERHardCodedDirector --> main : erModel
+
+deactivate ERHardCodedDirector
+
+
+
+note right main
+Here returned Model object is casted to ERModel.
+Main knew that NotOrientedERBuilder returned ERModel
+instance.
+In my opinion this is a bad practice. Main shouldn't
+know the implementation details of ModelBuilder's children.
+end note
+
+main -> ERModel : showStructure()
+
+destroy OrientedERBuilder
+destroy NotOrientedERBuilder
+destroy ERModel
+
+@enduml
