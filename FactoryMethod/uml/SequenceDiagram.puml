@@ -1,0 +1,23 @@
+@startuml
+
+	actor main
+
+	create BookReader
+	main -> BookReader : new
+	
+	main -> BookReader : displayOwnedBooks
+	
+	create AdventureBookReader
+	main -> AdventureBookReader : new
+	
+	main -> AdventureBookReader : buyBook
+	
+	main -> Book : new
+	main -> Book : getName
+	
+	
+	destroy Book
+	destroy AdventureBookReader
+	destroy BookReader
+
+@enduml
