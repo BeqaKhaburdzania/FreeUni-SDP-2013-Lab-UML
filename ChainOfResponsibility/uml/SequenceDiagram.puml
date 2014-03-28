@@ -37,4 +37,5 @@
     destroy Customer
     destroy Vendor
 	destroy SalesManager
+    destroy ClientAccountManager
 @enduml
