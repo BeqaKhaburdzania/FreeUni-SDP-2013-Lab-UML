@@ -1,0 +1,41 @@
+@startuml
+
+actor main
+
+create AlgebraicExpression
+main -> AlgebraicExpression : new
+
+create Number1
+main -> Number1 : new
+
+create Number2
+main -> Number2 : new
+
+create TextVisitor
+main -> TextVisitor : new
+
+main -> AlgebraicExpression : accept(TextVisitor)
+activate AlgebraicExpression
+
+AlgebraicExpression -> Number1 : accept(TextVisitor)
+activate Number1
+
+Number1 -> TextVisitor : visitNumber(Number1)
+deactivate Number1
+
+AlgebraicExpression -> Number2 : accept(TextVisitor)
+activate Number2
+
+Number2 -> TextVisitor : visitNumber(Number2)
+deactivate Number2
+deactivate AlgebraicExpression
+
+activate TextVisitor
+TextVisitor --> main : getResult()
+deactivate TextVisitor
+
+destroy TextVisitor
+destroy Number1
+destroy Number2
+
+@enduml
