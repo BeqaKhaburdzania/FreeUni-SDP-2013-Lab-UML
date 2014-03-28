@@ -91,4 +91,28 @@ abstract class UnaryOperator {
 	+void accpet(IVisitor visitor)
 }
 AlgebraicExpressions <|-- UnaryOperator
+BinaryOperator..>AlgebraicExpressions
+UnaryOperator..>AlgebraicExpressions
+AlgebraicExpressions *-- BinaryOperator
+AlgebraicExpressions *-- UnaryOperator
+Addition -down-> AlgebraicExpressions
+Addition -up-> IVisitor
+Substraction -down-> AlgebraicExpressions
+Substraction -up-> IVisitor
+Division -down-> AlgebraicExpressions
+Division -up-> IVisitor
+Multiplication -down-> AlgebraicExpressions
+Multiplication -up-> IVisitor
+ToValueVisitor -down-> Number
+ToValueVisitor -down-> Addition
+ToValueVisitor -down-> Division
+ToValueVisitor -down-> Substraction
+ToValueVisitor -down-> Multiplication
+ToValueVisitor -down-> Negation
+ToTextVisitor -up-> Number
+ToTextVisitor -up-> Addition
+ToTextVisitor -up-> Substraction
+ToTextVisitor -up-> Multiplication
+ToTextVisitor -up-> Division
+ToTextVisitor -up-> Negation
 @enduml
