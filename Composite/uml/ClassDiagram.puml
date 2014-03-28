@@ -1,9 +1,12 @@
 @startuml
+	
+	title Composite
+	
 	abstract class Component{
 		# String name
 		# int price
 		+ Component(String name)
-		+ void describe()
+		+ {abstract} void describe()
 		+ abstract void describe()
 		+ void add(Component c)
 		+ void remove(Component c)
@@ -36,8 +39,12 @@
 	RuntimeException <|-- SinglePartException
 	Component <|-- SinglePart
 	Component <|-- CompoundPart
+	Component --o CompoundPart
 	
 @enduml
+
+
+
 
 
 
