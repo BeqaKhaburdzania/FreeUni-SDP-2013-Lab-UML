@@ -1,6 +1,11 @@
 @startuml
 
+class TestVideoPlayer {
+	+{static}void main(String[] arg)
+}
+hide TestVideoPlayer fields 
 
+TestVideoPlayer->VideoPlayerContext
  VideoPlayerContext o-- VideoPlayerState
  
  VideoPlayerState <|.. VideoPlayerPlayingState

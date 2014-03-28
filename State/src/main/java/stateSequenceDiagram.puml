@@ -1,0 +1,62 @@
+@startuml
+
+actor main
+
+	activate main
+    create VideoPlayerContext
+    
+    main -> VideoPlayerContext: new
+	
+	
+	
+	
+	create VideoPlayerStoppedState
+	VideoPlayerContext ->VideoPlayerStoppedState:new
+	
+	
+    main -> VideoPlayerContext: play
+    activate VideoPlayerContext
+    
+    VideoPlayerContext -> VideoPlayerStoppedState:play(VideoPlayerContext)
+    activate VideoPlayerStoppedState
+   	create VideoPlayerPlayingState
+   	 VideoPlayerStoppedState->VideoPlayerPlayingState: new
+    VideoPlayerStoppedState  -> VideoPlayerContext:changeState(VideoPlayerPlayingState)
+    destroy VideoPlayerStoppedState
+    deactivate VideoPlayerContext
+    	
+    main -> VideoPlayerContext: getCurrentMode
+    activate VideoPlayerContext
+    VideoPlayerContext -> VideoPlayerPlayingState: getMode()
+    
+    activate  VideoPlayerPlayingState
+    
+    VideoPlayerContext <-- VideoPlayerPlayingState: mode
+    deactivate VideoPlayerPlayingState
+    main <-- VideoPlayerContext : currentMode
+	deactivate VideoPlayerContext
+	
+	main -> VideoPlayerContext: stop
+	activate VideoPlayerContext
+	 VideoPlayerContext -> VideoPlayerPlayingState:stop(VideoPlayerContext)
+	activate VideoPlayerPlayingState
+   	 VideoPlayerPlayingState-> VideoPlayerStoppedState: new
+   	 VideoPlayerPlayingState  -> VideoPlayerContext:changeState(VideoPlayerStoppedState)
+   	  destroy VideoPlayerPlayingState
+   	  deactivate VideoPlayerContext
+    
+    main -> VideoPlayerContext: getCurrentMode
+    activate VideoPlayerContext
+	
+	VideoPlayerContext -> VideoPlayerStoppedState: getMode()
+    
+    activate  VideoPlayerStoppedState
+    
+    VideoPlayerContext <-- VideoPlayerStoppedState: mode
+    deactivate VideoPlayerStoppedState
+	main <-- VideoPlayerContext : currentMode
+	destroy VideoPlayerStoppedState
+	destroy VideoPlayerContext
+	deactivate main
+	
+@enduml

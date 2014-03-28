@@ -12,20 +12,25 @@
 
     activate Vendor
     main -> Vendor : setSuperiorRequestHandler(sm)
+    deactivate Vendor
     
     activate SalesManager
     main -> SalesManager : setSuperiorRequestHandler(cam)
-
+	deactivate SalesManager
+	
     create Customer
     main -> Customer : new
     
 	Customer --> Vendor : requestCredit(v,i)
 	deactivate Customer
+	
+	activate Vendor
 	Vendor --> SalesManager : forwardCreditRequest
 	deactivate Vendor
+	activate SalesManager
     SalesManager --> ClientAccountManager : forwardCreditRequest
     deactivate SalesManager
-    
+    activate ClientAccountManager
     ClientAccountManager --> CreditRequestHandlerException : forwardCreditRequest
     deactivate ClientAccountManager
     
