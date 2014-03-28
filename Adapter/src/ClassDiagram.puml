@@ -36,7 +36,7 @@
 	hide RectangleClassAdapter fields
 	Polygon <|.. RectangleClassAdapter
 	Polygon <|.. RectangleObjectAdapter
-	RectangleObjectAdapter *-- Rectangle
+	RectangleObjectAdapter o-- Rectangle
 	Rectangle <|-- RectangleClassAdapter
 	
 @enduml

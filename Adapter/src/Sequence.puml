@@ -1,0 +1,18 @@
+@startuml
+	actor main
+	
+	create RectangleClassAdapter
+    main -> RectangleClassAdapter: new
+    activate RectangleClassAdapter
+    main -> RectangleClassAdapter: setId
+    main -> RectangleClassAdapter: define
+    deactivate RectangleClassAdapter
+    
+    create RectangleObjectAdapter
+    main -> RectangleObjectAdapter: new
+    activate RectangleObjectAdapter
+    main -> RectangleObjectAdapter: setId
+    main -> RectangleObjectAdapter: define
+    deactivate RectangleObjectAdapter
+    
+@enduml
