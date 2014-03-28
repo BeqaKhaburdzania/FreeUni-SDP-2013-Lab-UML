@@ -1,0 +1,36 @@
+@startuml
+	class ConsoleReader{
+		+ ConsoleReader ConsoleReader()
+		+ ConsoleReader ConsoleReader(Mode m)
+		+ String readString()
+		+ Integer readInteger()
+		+ Double readDouble()
+	}
+
+	enum Mode {
+	  	SECURE_MODE_ON
+		SECURE_MODE_OFF
+	}
+	
+	ConsoleReader "1" o-- "1" Mode
+	ConsoleReader "1" --> "1" BufferedReader
+	
+	RuntimeException <|-- ConsoleReaderException
+	
+	class ConsoleReaderException{
+		+ ConsoleReaderException(Exception e)
+	}
+	
+	class FacadeExample{
+		{static} void main(String args[])
+	}
+	
+	hide ConsoleReader field
+	hide BufferedReader field	
+	hide BufferedReader method
+	hide RuntimeException field	
+	hide RuntimeException method
+	hide ConsoleReaderException field
+	hide FacadeExample field
+	hide Mode method
+@enduml
