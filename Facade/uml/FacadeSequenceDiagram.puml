@@ -1,0 +1,47 @@
+@startuml
+	actor main
+	activate main
+	main --> ConsoleReader : secure: new(Mode.SECURE_MODE_ON)
+	main --> ConsoleReader : unSecure: new(Mode.SECURE_MODE_OFF)
+	
+	main --> ConsoleReader : secure: readString()
+	activate ConsoleReader
+		ConsoleReader --> BufferedReader : readLine()
+		ConsoleReader --> main : text: string
+	deactivate ConsoleReader
+	
+	main --> ConsoleReader : secure: readInteger()
+	activate ConsoleReader
+		ConsoleReader --> BufferedReader : readLine()
+		ConsoleReader --> main : num: Integer
+	deactivate ConsoleReader
+
+	main --> ConsoleReader : secure: readDouble()
+	activate ConsoleReader
+		ConsoleReader --> BufferedReader : readLine()
+		ConsoleReader --> main : doub: Double
+	deactivate ConsoleReader	
+	
+	main --> System: println(text, num, doub)
+	
+	main --> ConsoleReader : unSecure: readString()
+	activate ConsoleReader
+		ConsoleReader --> BufferedReader : readLine()
+		ConsoleReader --> main : text: String
+	deactivate ConsoleReader
+	
+	main --> ConsoleReader : unSecure: readInteger()
+	activate ConsoleReader
+		ConsoleReader --> BufferedReader : readLine()
+		ConsoleReader --> main : num: Integer
+	deactivate ConsoleReader
+	
+	main --> ConsoleReader : unSecure: readDouble()
+	activate ConsoleReader
+		ConsoleReader --> BufferedReader : readLine()
+		ConsoleReader --> main : doub: Double
+	deactivate ConsoleReader
+	
+	main --> System: println(text, num, doub)
+	deactivate main
+@enduml
