@@ -1,0 +1,45 @@
+@startuml
+	abstract class Component{
+		# String name
+		# int price
+		+ Component(String name)
+		+ void describe()
+		+ abstract void describe()
+		+ void add(Component c)
+		+ void remove(Component c)
+		+ Component getChild(int n)
+		+ int getPrice()
+	}
+	class CompoundPart{
+		- LinkedList<Component> children
+		+ CompoundPart(String name)
+		+ void describe()
+		+ void add(Component c)
+		+void remove(Component c)
+		+Component getChild(int num)
+		+int getPrice()
+	}
+	
+	class SinglePart {
+		+SinglePart(String name, int price)
+		+void describe()
+	}
+	
+	
+	
+	class SinglePartException {
+		-long serialVersionUID
+		+SinglePartException()
+	}
+	
+
+	RuntimeException <|-- SinglePartException
+	Component <|-- SinglePart
+	Component <|-- CompoundPart
+	
+@enduml
+
+
+
+
+

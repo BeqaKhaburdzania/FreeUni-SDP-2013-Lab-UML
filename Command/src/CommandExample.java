@@ -4,8 +4,11 @@ import java.io.InputStreamReader;
 
 
 public class CommandExample {
-	public static void main(String[] args) throws NumberFormatException, IOException {
-		TV aCommonTV = new TV();
+    private static String[] args;
+
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        CommandExample.args = args;
+        TV aCommonTV = new TV();
 		
 		UniversalRemoteControl remote = new UniversalRemoteControl(
 					new TVPowerCommand(aCommonTV),

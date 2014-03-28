@@ -1,0 +1,36 @@
+@startuml
+	actor main
+
+    create ClientAccountManager
+    main -> ClientAccountManager : new
+    
+    create SalesManager
+    main -> SalesManager : new
+    
+    create Vendor
+    main -> Vendor : new
+
+    activate Vendor
+    main -> Vendor : setSuperiorRequestHandler(sm)
+    
+    activate SalesManager
+    main -> SalesManager : setSuperiorRequestHandler(cam)
+
+    create Customer
+    main -> Customer : new
+    
+	Customer --> Vendor : requestCredit(v,i)
+	deactivate Customer
+	Vendor --> SalesManager : forwardCreditRequest
+	deactivate Vendor
+    SalesManager --> ClientAccountManager : forwardCreditRequest
+    deactivate SalesManager
+    
+    ClientAccountManager --> CreditRequestHandlerException : forwardCreditRequest
+    deactivate ClientAccountManager
+    
+    destroy Customer
+    destroy Vendor
+	destroy SalesManager
+    destroy ClientAccountManager
+@enduml

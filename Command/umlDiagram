@@ -1,0 +1,83 @@
+@startuml
+
+
+Command <|-- TVPowerCommand
+Command <|-- TVVolumeUpCommand
+Command <|-- TVVolumeDownCommand
+Command <|-- TVSetChannelCommand
+
+Command *-- UniversalRemoteControl
+
+TV o-- TVPowerCommand
+TV o-- TVVolumeDownCommand
+TV o-- TVVolumeUpCommand
+TV o-- TVSetChannelCommand
+
+interface Command {
+    + {abstract} execute() : void
+}
+
+
+class TV {
+    - power : TV_STATE
+    - volume : int
+    - channel : int
+
+    + power() : void
+    + volumeUp() : void
+    + volumeDown() : void
+    + setChannel(int ch) : void
+}
+
+class TVPowerCommand {
+
+    - theTv : TV
+
+    + TVPowerCommand(theTV : TV) : void
+	+ execute() : void
+
+
+}
+class TVVolumeDownCommand {
+
+    - theTV : TV
+
+	+ TVVolumeDownCommand(theTV : TV)
+	+ execute() : void
+}
+
+class TVVolumeUpCommand {
+
+    - theTV : TV
+
+    + TVVolumeUpCommand(theTV : TV)
+    + execute() : void
+}
+
+
+class TVSetChannelCommand {
+    - theTV : TV
+
+    + TVSetChannelCommand(theTV : TV)
+    + execute() : void
+    - acceptNumber() : int
+
+}
+
+class UniversalRemoteControl {
+    	- buttonPower : Command
+    	- buttonArrowUp : Command
+    	- buttonArrowDown : Command
+    	- keypadToEnterNumber : Command
+
+    	+ UniversalRemoteControl(pw : Command, au : Command, ad : Command, nu : Command)
+    	+ pressButtonPower() : void
+    	+ pressButtonArrowUp() : void
+    	+ pressButtonArrowDown() : void
+    	+ pressKeypadToEnterNumber() : void
+}
+
+
+
+
+@enduml
