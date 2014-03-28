@@ -16,9 +16,18 @@ TV o-- TVSetChannelCommand
 interface Command {
     + {abstract} execute() : void
 }
+hide Command fields
 
+enum  TV_STATE {
+	OFF
+	ON
+}
+
+hide TV_STATE methods
 
 class TV {
+
+
     - power : TV_STATE
     - volume : int
     - channel : int
@@ -77,7 +86,11 @@ class UniversalRemoteControl {
     	+ pressKeypadToEnterNumber() : void
 }
 
+hide CommandExample fields
 
+class CommandExample{
+    +  main(String[] args): void
+}
 
 
 @enduml
