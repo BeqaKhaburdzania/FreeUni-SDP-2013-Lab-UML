@@ -1,0 +1,94 @@
+@startuml
+class Addition {
+	+Addition(AlgebraicExpressions leftOperand, AlgebraicExpressions rightOperand)
+	#void performVisit(IVisitor visitor)
+}
+BinaryOperator <|-- Addition
+abstract class AlgebraicExpressions {
+	+void accpet(IVisitor visitor)
+	#void performVisit(IVisitor visitor)
+}
+abstract class BinaryOperator {
+	-AlgebraicExpressions __LeftOperand
+	-AlgebraicExpressions __RightOperand
+	#BinaryOperator(AlgebraicExpressions leftOperand, AlgebraicExpressions rightOperand)
+	+AlgebraicExpressions getLeftOperand()
+	+void setLeftOperand(AlgebraicExpressions value)
+	+AlgebraicExpressions getRightOperand()
+	+void setRightOperand(AlgebraicExpressions value)
+	+void accpet(IVisitor visitor)
+}
+AlgebraicExpressions <|-- BinaryOperator
+class Division {
+	+Division(AlgebraicExpressions leftOperand, AlgebraicExpressions rightOperand)
+	#void performVisit(IVisitor visitor)
+}
+BinaryOperator <|-- Division
+interface IVisitor {
+	void visitNumber(Number expression)
+	void visitNegation(Negation expression)
+	void visitAddition(Addition expression)
+	void visitSubstraction(Substraction expression)
+	void visitMultiplication(Multiplication expression)
+	void visitDivision(Division expression)
+}
+class Multiplication {
+	+Multiplication(AlgebraicExpressions leftOperand, AlgebraicExpressions rightOperand)
+	#void performVisit(IVisitor visitor)
+}
+BinaryOperator <|-- Multiplication
+class Negation {
+	+Negation(AlgebraicExpressions operand)
+	#void performVisit(IVisitor visitor)
+}
+UnaryOperator <|-- Negation
+class Number {
+	-int __Value
+	+Number(int value)
+	+int getValue()
+	+void setValue(int value)
+	+void accpet(IVisitor visitor)
+	#void performVisit(IVisitor visitor)
+}
+AlgebraicExpressions <|-- Number
+class Program {
+	+void main(String[] args)
+}
+class Substraction {
+	+Substraction(AlgebraicExpressions leftOperand, AlgebraicExpressions rightOperand)
+	#void performVisit(IVisitor visitor)
+}
+BinaryOperator <|-- Substraction
+class ToValueVisitor {
+	-Stack<Integer> m_OperandStack
+	+ToValueVisitor()
+	+void visitNumber(Number expression)
+	+void visitNegation(Negation expression)
+	+void visitAddition(Addition expression)
+	+void visitSubstraction(Substraction expression)
+	+void visitMultiplication(Multiplication expression)
+	+void visitDivision(Division expression)
+	+int getResult()
+}
+IVisitor <|.. ToValueVisitor
+class ToTextVisitor {
+	-Stack<String> m_TextStack
+	+ToTextVisitor()
+	+void visitNumber(Number expression)
+	+void visitNegation(Negation expression)
+	+void visitAddition(Addition expression)
+	+void visitSubstraction(Substraction expression)
+	+void visitMultiplication(Multiplication expression)
+	+void visitDivision(Division expression)
+	+String getResult()
+	-void visitBinary(String formula)
+}
+abstract class UnaryOperator {
+	-AlgebraicExpressions __Operand
+	#UnaryOperator(AlgebraicExpressions operand)
+	+AlgebraicExpressions getOperand()
+	+void setOperand(AlgebraicExpressions value)
+	+void accpet(IVisitor visitor)
+}
+AlgebraicExpressions <|-- UnaryOperator
+@enduml

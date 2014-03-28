@@ -1,0 +1,52 @@
+@startuml
+	
+	class Program {
+		+{static}void main(String[] args)
+	}
+	abstract class Book {
+	}
+	abstract class BookReader {
+		-Book __Book
+		+BookReader()
+		+Book getBook()
+		+void setBook(Book value)
+		+{abstract}Book buyBook()
+		+void displayOwnedBooks()
+	}
+	class Dracula {
+	}
+	class Encyclopedia {
+	}
+	class LordOfTheRings {
+	}
+	class TreasureIsland {
+	}
+	class AdventureBookReader {
+		+Book buyBook()
+	}
+	class FantasyBookReader {
+		+Book buyBook()
+	}
+	class HorrorBookReader {
+		+Book buyBook()
+	}
+	
+	BookReader o-- Book
+	
+	Book <|-- TreasureIsland
+	Book <|-- LordOfTheRings
+	Book <|-- Dracula
+	Book <|-- Encyclopedia
+	BookReader <|-- HorrorBookReader
+	BookReader <|-- FantasyBookReader
+	BookReader <|-- AdventureBookReader
+	
+	AdventureBookReader ..> TreasureIsland
+	FantasyBookReader ..> LordOfTheRings
+	HorrorBookReader ..> Dracula
+	BookReader ..> Book
+	
+	Program -> Book
+	Program -down-> BookReader
+	Program -down-> AdventureBookReader
+@enduml

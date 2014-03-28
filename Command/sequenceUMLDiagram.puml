@@ -1,0 +1,68 @@
+@startuml
+
+    actor main
+
+    create CommandExample
+
+
+    main -> CommandExample : new
+
+
+
+    create TV
+    main -> TV : new
+
+
+    create TVPowerCommand
+    main -> TVPowerCommand : new (TV aCommonTV)
+
+
+    create TVVolumeDownCommand
+    main -> TVVolumeDownCommand : new (TV aCommonTV)
+
+    create TVVolumeUpCommand
+    main -> TVVolumeUpCommand : new(TV aCommonTV)
+
+
+    create TVSetChannelCommand
+    main -> TVSetChannelCommand : new(TV aCommonTV)
+
+
+    create UniversalRemoteControl
+    main -> UniversalRemoteControl : new
+
+
+    create InputStreamReader
+    main -> InputStreamReader : new
+
+    create BufferedReader
+    main -> BufferedReader : new
+
+
+    loop
+
+        alt nOptions == 1
+
+            main -> UniversalRemoteControl : pressButtonArrowUp()
+            UniversalRemoteControl -> Command : execute()
+        else nOptions == 2
+            main -> UniversalRemoteControl : pressButtonArrowDown()
+             UniversalRemoteControl -> Command : execute()
+        else nOptions == 3
+            main -> UniversalRemoteControl : pressKeypadToEnterNumber()
+            UniversalRemoteControl -> Command : execute()
+        else nOptions == 4
+            main -> UniversalRemoteControl : pressButtonPower()
+            UniversalRemoteControl -> Command : execute()
+        end
+
+    end
+
+
+
+
+
+
+
+
+@enduml
