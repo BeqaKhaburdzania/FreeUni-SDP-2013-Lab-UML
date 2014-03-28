@@ -1,0 +1,49 @@
+
+
+@startuml
+	title  Chain of Responsibility
+	abstract class CreditRequestHandler {
+		-superior : CreditRequestHandler
+		+setSuperiorRequestHandler(CreditRequestHandler superior) : void
+		+creditRequest(int amount) : void
+		#forwardCreditRequest(int amount) : void
+	}
+	
+	class ClientAccountManager {
+		+creditRequest(int amount) : void
+	}
+	
+	class Vendor {
+	}
+	
+	class SalesManager {
+		+creditRequest(int amount) : void
+	}
+	
+	class Customer {
+		+requestCredit(CreditRequestHandler ch, int amount) : void
+	}
+	
+	class CreditRequestHandlerException {
+		-{static} serialVersionUID : long
+		+CreditRequestHandlerException()
+	}
+	class RuntimeException {
+	}
+	
+	class ChainOfResponsibilityExample {
+		+{static} main(String[] args) : void
+	}
+	
+	RuntimeException <|-- CreditRequestHandlerException
+	CreditRequestHandler <|-- SalesManager
+	CreditRequestHandler <|-- Vendor
+	CreditRequestHandler <|-- ClientAccountManager
+	CreditRequestHandler o-- CreditRequestHandler
+	
+	Customer -down-> CreditRequestHandler
+	ChainOfResponsibilityExample -down-> ClientAccountManager
+	ChainOfResponsibilityExample -down-> Customer
+	ChainOfResponsibilityExample -down-> Vendor
+	ChainOfResponsibilityExample -down-> SalesManager
+@enduml
