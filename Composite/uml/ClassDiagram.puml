@@ -37,9 +37,9 @@
 	
 
 	RuntimeException <|-- SinglePartException
+	Component " n " --* " 1 "   CompoundPart
 	Component <|-- SinglePart
 	Component <|-- CompoundPart
-	Component --o CompoundPart
 	
 @enduml
 
