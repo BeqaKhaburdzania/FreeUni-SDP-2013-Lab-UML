@@ -1,5 +1,9 @@
 @startuml
 	actor main
+	participant "c : Customer" as Customer
+	participant "v : Vendor" as Vendor
+	participant "sm : SalesManager" as SalesManager
+	participant "cam : ClientAccountManager" as ClientAccountManager
 
     create ClientAccountManager
     main -> ClientAccountManager : new
@@ -10,32 +14,47 @@
     create Vendor
     main -> Vendor : new
 
-    activate Vendor
     main -> Vendor : setSuperiorRequestHandler(sm)
-    deactivate Vendor
-    
-    activate SalesManager
     main -> SalesManager : setSuperiorRequestHandler(cam)
-	deactivate SalesManager
 	
     create Customer
     main -> Customer : new
     
-	Customer --> Vendor : requestCredit(v,i)
-	deactivate Customer
+    loop amount = 500; amount <=2500; amount += 500
+    	group try
+			main -> Customer : requestCredit(v,amount)
+			activate Customer
+			Customer -> Vendor : creditRequest(amount)
+			Vendor -> SalesManager : forwardCreditRequest(amount)
+			activate SalesManager
+			alt amount <= 1000
+				SalesManager --> Vendor
+	   			Vendor --> Customer
+	   			Customer --> main
+			else
+		    	SalesManager -> ClientAccountManager : forwardCreditRequest(ammount)
+		   		activate ClientAccountManager
+		   		alt ammount <=2000
+		   			ClientAccountManager-->SalesManager
+		   			deactivate ClientAccountManager
+		   			SalesManager --> Vendor
+		   			deactivate SalesManager
+		   			Vendor --> Customer
+		   			deactivate Vendor
+		   			Customer --> main
+		   			deactivate Customer
+		   			
+		    		
+		    		deactivate Customer
+		   		 else
+		   		    create CreditRequestHandlerException
+		    		ClientAccountManager -> CreditRequestHandlerException : new
+		    		ClientAccountManager --[#Red]> main : <font color=red>throw exception</font>
+		    	end
+	    	end
+		   
+		else catch
+				   
+	end    
 	
-	activate Vendor
-	Vendor --> SalesManager : forwardCreditRequest
-	deactivate Vendor
-	activate SalesManager
-    SalesManager --> ClientAccountManager : forwardCreditRequest
-    deactivate SalesManager
-    activate ClientAccountManager
-    ClientAccountManager --> CreditRequestHandlerException : forwardCreditRequest
-    deactivate ClientAccountManager
-    
-    destroy Customer
-    destroy Vendor
-	destroy SalesManager
-    destroy ClientAccountManager
 @enduml
