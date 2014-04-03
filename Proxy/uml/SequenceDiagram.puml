@@ -9,8 +9,10 @@ main -> ProxyFileHandler : new(fileName)
 main -> ProxyFileHandler : getFileName()
 activate ProxyFileHandler
 main <-- ProxyFileHandler : fileName
+deactivate ProxyFileHandler
 
 main -> ProxyFileHandler : getContent()
+activate ProxyFileHandler
 create RealFileHandler
     ProxyFileHandler -> RealFileHandler : new(fileName)
     create FileInputStream
@@ -25,28 +27,18 @@ create RealFileHandler
 ProxyFileHandler -> RealFileHandler : getContent()
 ProxyFileHandler <-- RealFileHandler : content
 main <-- ProxyFileHandler : content
-
-main -> ProxyFileHandler : getContent()
-ProxyFileHandler -> RealFileHandler : getContent()
-ProxyFileHandler <-- RealFileHandler : content
-main <-- ProxyFileHandler : content
+deactivate ProxyFileHandler
 
 main -> ProxyFileHandler : getLine(requestedLine)
-ProxyFileHandler -> RealFileHandler : getLine(requestedLine)
-ProxyFileHandler <-- RealFileHandler : lineText
-note right : Accessing from \nRealFileHandler
+activate ProxyFileHandler
+alt requestedLine != lineNumber
+	ProxyFileHandler -> RealFileHandler : getLine(requestedLine)
+	ProxyFileHandler <-- RealFileHandler : lineText
+	note right : Cache miss
+end
 main <-- ProxyFileHandler : lineText
 
-main -> ProxyFileHandler : getLine(requestedLine)
-main <-- ProxyFileHandler : lineText
-note right: Accessing from \nproxy cache
-
-main -> ProxyFileHandler : getLine(otherRequestedLine)
-ProxyFileHandler -> RealFileHandler : getLine(otherRequestedLine)
-ProxyFileHandler <-- RealFileHandler : otherLineText
-note right : Accessing from \nRealFileHandler
-main <-- ProxyFileHandler : otherLineText
-
+	
 deactivate ProxyFileHandler
 
 @enduml
