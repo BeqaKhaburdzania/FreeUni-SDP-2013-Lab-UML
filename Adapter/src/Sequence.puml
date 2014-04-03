@@ -1,18 +1,20 @@
 @startuml
-	actor main
+    actor main
 	
-	create RectangleClassAdapter
+    create RectangleClassAdapter
     main -> RectangleClassAdapter: new
-    activate RectangleClassAdapter
-    main -> RectangleClassAdapter: setId
-    main -> RectangleClassAdapter: define
-    deactivate RectangleClassAdapter
+    main -> RectangleClassAdapter: setId()
+    main -> RectangleClassAdapter: define()
+    RectangleClassAdapter->RectangleClassAdapter: setShape()
     
     create RectangleObjectAdapter
     main -> RectangleObjectAdapter: new
-    activate RectangleObjectAdapter
-    main -> RectangleObjectAdapter: setId
-    main -> RectangleObjectAdapter: define
-    deactivate RectangleObjectAdapter
+
+    create Rectangle
+    main -> Rectangle: new
+
+    main -> RectangleObjectAdapter: setId()
+    main -> RectangleObjectAdapter: define()
+    RectangleObjectAdapter -> Rectangle : setShape()
     
 @enduml
