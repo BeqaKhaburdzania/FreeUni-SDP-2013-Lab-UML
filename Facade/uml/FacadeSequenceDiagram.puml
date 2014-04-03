@@ -1,47 +1,45 @@
 @startuml
-	actor main
-	activate main
-	main --> ConsoleReader : secure: new(Mode.SECURE_MODE_ON)
-	main --> ConsoleReader : unSecure: new(Mode.SECURE_MODE_OFF)
-	
-	main --> ConsoleReader : secure: readString()
-	activate ConsoleReader
-		ConsoleReader --> BufferedReader : readLine()
-		ConsoleReader --> main : text: string
-	deactivate ConsoleReader
-	
-	main --> ConsoleReader : secure: readInteger()
-	activate ConsoleReader
-		ConsoleReader --> BufferedReader : readLine()
-		ConsoleReader --> main : num: Integer
-	deactivate ConsoleReader
 
-	main --> ConsoleReader : secure: readDouble()
-	activate ConsoleReader
-		ConsoleReader --> BufferedReader : readLine()
-		ConsoleReader --> main : doub: Double
-	deactivate ConsoleReader	
+	participant main
+
+	participant "ConsoleReader" as reader
 	
-	main --> System: println(text, num, doub)
+	alt
+	create reader 
+		main -> reader : new(Mode.SECURE_MODE_ON)
+	else
+		main -> reader : new(Mode.SECURE_MODE_OFF)
+	end
+	actor Console
 	
-	main --> ConsoleReader : unSecure: readString()
-	activate ConsoleReader
-		ConsoleReader --> BufferedReader : readLine()
-		ConsoleReader --> main : text: String
-	deactivate ConsoleReader
+	group try 
 	
-	main --> ConsoleReader : unSecure: readInteger()
-	activate ConsoleReader
-		ConsoleReader --> BufferedReader : readLine()
-		ConsoleReader --> main : num: Integer
-	deactivate ConsoleReader
+		main -> reader : readInteger()
+		activate reader
+			reader -> Console : readLine()
+			Console --> reader : String
+			create Integer
+			group try
+				reader -> Integer: new (String)
+			else catch
+				alt mode == Mode.SECURE_MODE_ON
+					create ConsoleReaderException
+					reader -> ConsoleReaderException
+					reader -[#red]> main : ConsoleReaderException 	
+				else 
+				    participant "0 : Integer" as 0
+				    create 0
+					reader -> 0 : new (0)
+				end 
+			end
+			reader --> main : Integer
+		deactivate reader
 	
-	main --> ConsoleReader : unSecure: readDouble()
-	activate ConsoleReader
-		ConsoleReader --> BufferedReader : readLine()
-		ConsoleReader --> main : doub: Double
-	deactivate ConsoleReader
+	else catch(ConsoleReaderException e)
+		main --> Console : "println('WTF?')";
+	else finally
+		main --> Console : println(text, num, doub)
+	end
 	
-	main --> System: println(text, num, doub)
-	deactivate main
+	
 @enduml
