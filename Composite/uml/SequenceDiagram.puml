@@ -5,15 +5,24 @@
     create SinglePart
    	main -> SinglePart : new
     create CompoundPart
-   	main -> CompoundPart : new   
+   	main -> CompoundPart : new
+   	create ArrayList
+	CompoundPart -> ArrayList
+   	   
    	
-   	main -> CompoundPart : add(keyboard)
+   	main -> CompoundPart : add(part)
 	activate CompoundPart
+	
  	CompoundPart -> ArrayList : add(child)
     deactivate CompoundPart
     
     main -> SinglePart : describe()
     main -> CompoundPart : describe()
-   
-	
+    activate CompoundPart
+    loop while ArrayList.hasNext()
+	    CompoundPart -> ArrayList : next()
+	    ArrayList --> CompoundPart
+	    CompoundPart -> SinglePart
+    end
+   deactivate CompoundPart	
 @enduml
