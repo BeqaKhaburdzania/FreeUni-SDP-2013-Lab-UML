@@ -2,22 +2,38 @@
 
 	actor main
 
-	create BookReader
-	main -> BookReader : new
+ 	create List
+ 	main -> List : new
+
+    group foreach concrete BookReader 	
+	 	create BookReader
+	 	main -> BookReader : new
+	 	activate BookReader
+	 	BookReader -> BookReader : buyBook()
+	 	activate BookReader
+	 	create Book
+	 	BookReader->Book:new
+	 	deactivate BookReader
+	 	BookReader --> main
+	 	deactivate BookReader
+	 	main -> List : add(bookReader)
+	end
 	
-	main -> BookReader : displayOwnedBooks
-	
+ 	loop foreach BookReader in bookReaderList
+ 		main-> List : getNext()
+ 		List --> main : reader
+ 		main -> "BookReader" : displayOwnedBooks()
+ 	end
+
 	create AdventureBookReader
-	main -> AdventureBookReader : new
+	main -> AdventureBookReader
 	
-	main -> AdventureBookReader : buyBook
+	main -> AdventureBookReader : buyBook()
+	activate AdventureBookReader
 	
-	main -> Book : new
-	main -> Book : getName
-	
-	
-	destroy Book
-	destroy AdventureBookReader
-	destroy BookReader
+	create TreasureIsland 
+	AdventureBookReader -> TreasureIsland : new
+	AdventureBookReader --> main : book
+	deactivate AdventureBookReader
 
 @enduml
