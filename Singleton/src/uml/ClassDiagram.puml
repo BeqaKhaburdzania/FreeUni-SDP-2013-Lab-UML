@@ -1,0 +1,12 @@
+@startuml
+class singleton.Singleton{
+    -_instance : Singleton
+    -value : int
+
+    #Singleton()
+    +{static} getInstance() : Singleton
+    +setValue(value : int) : void
+}
+
+singleton.Singleton *-- singleton.Singleton
+@enduml

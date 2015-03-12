@@ -1,0 +1,7 @@
+@startuml
+    [-> Singleton : getInstance()
+    alt _instance == null
+        Singleton -> Singleton : Singleton()
+    end
+    [<-- Singleton : Singleton
+@enduml
