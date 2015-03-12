@@ -4,8 +4,8 @@ public class Tester {
 
 	public static void main(String[] args) {
 
-		SortingTemplate temp1 = new IncreasingOrder();
-		SortingTemplate temp2 = new DecreasingOrder();
+		IncreasingOrder temp1 = new IncreasingOrder();
+		DecreasingOrder temp2 = new DecreasingOrder();
 
 		Scanner input = new Scanner(System.in);
 		

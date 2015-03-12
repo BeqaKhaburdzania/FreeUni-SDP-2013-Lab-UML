@@ -34,4 +34,7 @@
 	SortingTemplate <|-- IncreasingOrder
 	SortingTemplate <|-- DecreasingOrder
 	
+	Tester -up-> IncreasingOrder
+	Tester -up-> DecreasingOrder
+	
 @enduml
