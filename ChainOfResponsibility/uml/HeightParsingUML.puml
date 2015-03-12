@@ -1,0 +1,55 @@
+@startuml 
+	title HeightParsing Example's UML
+	class AverageHeightParser{
+		#ParseHuman(human : Human) : boolean
+	}
+	class LowHeightParser{
+		#ParseHuman(human : Human) : boolean
+	}	
+	class HighHeightParser{
+		#ParseHuman(human : Human) : boolean
+	}
+	class HeightManager{
+		+ManageHeights(human : Human, parser : HeightParser) : void
+	}
+	abstract class HeightParser{
+		-successor: HeightParser	
+		+setHeightParser(parser : HeightParser) : void
+		#{abstract} ParseHuman(human : Human) : boolean
+		+ final ParseHumanFinal(human : Human) : void
+	}
+	class NoSuccessorException{
+		-{static} SERIALVERSIONUID : long
+		+NoSuccessorException()
+	}	
+	class RuntimeException {
+	}
+	class Human {
+		-Name : String
+		-Lastname : String
+		-Height : int
+		+Human(name : String, lastname : String, height : int)
+		+getHeight() : int
+		+getNameLastName() : String
+	}
+	class MainHeightParser{
+		+{static} main(args: String[] ) : void
+	}
+	
+	RuntimeException <|-- NoSuccessorException
+	HeightParser <|-- LowHeightParser
+	HeightParser <|-- HighHeightParser
+	HeightParser <|-- AverageHeightParser
+	
+	HeightParser o-- HeightParser
+	
+	
+	MainHeightParser -down-> Human
+	MainHeightParser -down-> HighHeightParser
+	MainHeightParser -down-> AverageHeightParser
+	MainHeightParser -down-> LowHeightParser
+	MainHeightParser -down-> HeightManager
+	HeightManager -down-> HeightParser
+	HeightManager -down-> Human
+	HeightParser -down-> NoSuccessorException
+@enduml

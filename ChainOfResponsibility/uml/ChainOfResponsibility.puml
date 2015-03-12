@@ -14,6 +14,7 @@
 	}
 	
 	class Vendor {
+		+creditRequest(int amount) : void
 	}
 	
 	class SalesManager {
@@ -25,7 +26,7 @@
 	}
 	
 	class CreditRequestHandlerException {
-		-{static} serialVersionUID : long
+		-{static} SERIALVERSIONUID : long
 		+CreditRequestHandlerException()
 	}
 	class RuntimeException {
@@ -47,3 +48,4 @@
 	ChainOfResponsibilityExample -down-> Vendor
 	ChainOfResponsibilityExample -down-> SalesManager
 @enduml
+
