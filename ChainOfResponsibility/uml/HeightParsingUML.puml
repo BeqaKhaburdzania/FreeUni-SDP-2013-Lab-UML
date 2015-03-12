@@ -1,0 +1,45 @@
+@startuml 
+	title HeightParsing Example's UML
+	class AverageHeightParser{
+		#ParseHuman(human : Human) : boolean
+	}
+	class LowHeightParser{
+		#ParseHuman(human : Human) : boolean
+	}	
+	class HighHeightParser{
+		#ParseHuman(human : Human) : boolean
+	}
+	class HeightManager{
+		+ManageHeights(human : Human, parser : HeightParser) : void
+	}
+	abstract class HeightParser{
+		-successor: HeightParser	
+		+setHeightParser(parser : HeightParser) : void
+		#ParseHuman(human : Human) : boolean
+		+ParseHumanFinal(human : Human) : void
+	}
+	class NoSuccessorException{
+		-{static} SERIALVERSIONUID : long
+		+NoSuccessorException()
+	}	
+	class RuntimeException {
+	}
+	class Human {
+		-Name : String
+		-Lastname : String
+		-Height : int
+		+Human(name : String, lastname : String, height : int)
+		+getHeight() : int
+		+getNameLastName() : String
+	}
+	class MainHeightParser{
+		+{static} main(args: String[] ) : void
+	}
+	
+	RuntimeException <|-- NoSuccessorException
+	HeightParser <|-- LowHeightParser
+	HeightParser <|-- HighHeightParser
+	HeightParser <|-- AverageHeightParser
+	
+	HeightParser o-- HeightParser
+@enduml
