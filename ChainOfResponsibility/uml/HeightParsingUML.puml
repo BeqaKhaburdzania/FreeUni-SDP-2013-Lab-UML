@@ -15,8 +15,8 @@
 	abstract class HeightParser{
 		-successor: HeightParser	
 		+setHeightParser(parser : HeightParser) : void
-		#ParseHuman(human : Human) : boolean
-		+ParseHumanFinal(human : Human) : void
+		#{abstract} ParseHuman(human : Human) : boolean
+		+ final ParseHumanFinal(human : Human) : void
 	}
 	class NoSuccessorException{
 		-{static} SERIALVERSIONUID : long
@@ -42,4 +42,14 @@
 	HeightParser <|-- AverageHeightParser
 	
 	HeightParser o-- HeightParser
+	
+	
+	MainHeightParser -down-> Human
+	MainHeightParser -down-> HighHeightParser
+	MainHeightParser -down-> AverageHeightParser
+	MainHeightParser -down-> LowHeightParser
+	MainHeightParser -down-> HeightManager
+	HeightManager -down-> HeightParser
+	HeightManager -down-> Human
+	HeightParser -down-> NoSuccessorException
 @enduml
