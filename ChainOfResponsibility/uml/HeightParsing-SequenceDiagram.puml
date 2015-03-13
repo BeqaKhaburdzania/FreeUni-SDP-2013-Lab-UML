@@ -1,0 +1,39 @@
+@startuml
+actor Main #yellow
+participant "LowHeightParser : LowHeightParser" as LowHeightParser
+participant "AVGHeightParser : AverageHeightParser" as AverageHeightParser
+participant "HighHeightParser : HighHeightParser" as HighHeightParser
+
+participant "Manager : HeightManager" as HeightManager
+participant "LowHeightPerson : Human" as Human
+participant "AverageHeightPerson : Human" as Human
+participant "HighHeightPerson : Human" as Human
+
+create LowHeightParser
+Main -> LowHeightParser : new
+    
+create AverageHeightParser
+Main -> AverageHeightParser : new
+
+create HighHeightParser
+Main -> HighHeightParser : new
+
+Main -> LowHeightParser : setHeightParser(AVGHeightParser)
+Main -> AverageHeightParser : setHeightParser(HighHeightParser)
+
+create HeightManager
+Main -> HeightManager : new
+
+create LowHeightPerson
+Main -> LowHeightPerson : new
+
+create AverageHeightPerson
+Main -> AverageHeightPerson : new
+
+create HighHeightPerson
+Main -> HighHeightPerson : new
+
+Main -> HeightManager : ManageHeights(lowHeighter, lowHeight)
+Main -> HeightManager : ManageHeights(lowHeighter, lowHeight)
+Main -> HeightManager : ManageHeights(lowHeighter, lowHeight)
+@enduml

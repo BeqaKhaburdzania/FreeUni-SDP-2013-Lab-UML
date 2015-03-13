@@ -43,7 +43,6 @@
 	
 	HeightParser o-- HeightParser
 	
-	
 	MainHeightParser -down-> Human
 	MainHeightParser -down-> HighHeightParser
 	MainHeightParser -down-> AverageHeightParser
