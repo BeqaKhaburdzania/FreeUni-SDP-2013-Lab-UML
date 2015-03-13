@@ -1,28 +1,55 @@
 @startuml
 
-abstract class AbstractList
-abstract AbstractCollection {
-    +void bla()
-}
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
--size()
+class MediatorExample {
+    + {static} void main(String[] args)
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+abstract class BankEntity {
+    ~ BankServiceOrganizer bOrganizer
+    + BankEntity(BankServiceOrganizer bo)
+    + void changed()
+}
+
+interface BankServiceOrganizer {
+    + void entityChanged(BankEntity be);
+}
+
+class LittleBank {
+    - Queue queue1, queue2
+    - Teller teller1, teller2
+    + LittleBank()
+    + void customerArriveToQ1()
+    + void customerArriveToQ2()
+    + void endServiceTeller1()
+    + void endServiceTeller2()
+    + void showStatus()
+}
+
+class LittleBankServiceOrganizer implements BankServiceOrganizer {
+    - Queue queue1, queue2
+    - Teller teller1, teller2
+    + void createBankEntities()
+    + void entityChanged(BankEntity be)
+    + Queue getQueue1()
+    + Queue getQueue2()
+    + Teller getTeller1()
+    + Teller getTeller2()
+}
+
+class Queue extends BankEntity {
+    - int size;
+    + Queue(BankServiceOrganizer bo)
+    + void dequeue()
+    + void enqueue()
+    + int getSize()
+}
+
+class Teller extends BankEntity {
+    - boolean isFree;
+    + Teller(BankServiceOrganizer bo)
+    + void initService(Queue q)
+    + void endService()
+    + boolean isFree()
 }
 
 @enduml
