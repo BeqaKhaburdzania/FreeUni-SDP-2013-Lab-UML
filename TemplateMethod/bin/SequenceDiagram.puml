@@ -1,0 +1,26 @@
+@startuml
+
+    actor main
+
+    create IncreasingOrder
+    main -> IncreasingOrder : new
+    
+    create DecreasingOrder
+    main -> DecreasingOrder : new
+    
+    create Scanner
+    main -> Scanner : new
+	
+	loop choice != 0
+		main -> Scanner : nextInt()
+		Scanner --> main : int(choice)
+		
+		alt choice == 1	
+            main -> IncreasingOrder : templateMethod()
+        else choice == 2
+            main -> DecreasingOrder : templateMethod()    
+        end
+    end
+ 
+
+@enduml

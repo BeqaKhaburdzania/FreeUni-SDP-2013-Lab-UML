@@ -1,0 +1,40 @@
+@startuml
+	interface Comparator<Integer>{
+		+ int compare(Integer o1, Integer o2)
+	}
+	
+	abstract class SortingTemplate {
+		# ArrayList<Integer> listOfNumbers
+		+ final void templateMethod()
+		- void readNumbers()
+		- void printSortedList()
+		- void cleanList()
+		~ {abstract} void sort()
+		~ {abstract} void sortOrder()
+	}
+	
+	
+	class IncreasingOrder {
+		+ int compare(Integer o1, Integer o2)
+		~ void sort()
+		~ void sortOrder()
+	}
+	
+	class DecreasingOrder {
+		+ int compare(Integer o1, Integer o2)
+		~ void sort()
+		~ void sortOrder()
+	}
+	
+	class Tester {
+        + {static} void main(String[] args)
+    }
+		
+	Comparator <|.. SortingTemplate
+	SortingTemplate <|-- IncreasingOrder
+	SortingTemplate <|-- DecreasingOrder
+	
+	Tester -up-> IncreasingOrder
+	Tester -up-> DecreasingOrder
+	
+@enduml
