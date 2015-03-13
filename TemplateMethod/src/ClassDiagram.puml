@@ -9,21 +9,21 @@
 		- void readNumbers()
 		- void printSortedList()
 		- void cleanList()
-		{abstract} void sort()
-		{abstract} void sortOrder()
+		~ {abstract} void sort()
+		~ {abstract} void sortOrder()
 	}
 	
 	
 	class IncreasingOrder {
 		+ int compare(Integer o1, Integer o2)
-		void sort()
-		void sortOrder()
+		~ void sort()
+		~ void sortOrder()
 	}
 	
 	class DecreasingOrder {
 		+ int compare(Integer o1, Integer o2)
-		void sort()
-		void sortOrder()
+		~ void sort()
+		~ void sortOrder()
 	}
 	
 	class Tester {
