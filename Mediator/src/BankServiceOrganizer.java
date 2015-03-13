@@ -1,4 +1,6 @@
 
 public interface BankServiceOrganizer {
-	public void entityChanged(BankEntity be);
+
+    public void entityChanged(BankEntity be);
+
 }
