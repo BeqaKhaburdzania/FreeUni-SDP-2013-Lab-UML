@@ -2,7 +2,7 @@ package gofiterator;
 
 public class DestinationsIterator implements Iterator{
 	private String[] destinations;
-	int position = 0;
+	private int position = 0;
 	
 	/**
 	 * Public constructor of DestinationsIterator.

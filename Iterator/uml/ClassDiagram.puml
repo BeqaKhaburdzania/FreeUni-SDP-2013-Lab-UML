@@ -1,0 +1,48 @@
+@startuml
+	
+	title Iterator
+	
+	class IteratorMain{
+		+ void {static} main(String[] args)
+	}
+	
+	interface Iterator{
+		+ void first()
+		+ void next()
+		+ boolean isDone()
+		+ Object currentItem()
+	}
+	
+	interface Iterable{
+		+ Iterator createIterator()
+	}
+	
+	class Destinations{
+		- String[] destinations
+		- int internal_index
+		- int maxNumberOfDestinations
+		+ Destinations(int maxNumberOfDestinations)
+		+ void add(String value)
+		+ Iterator createIterator()
+	}
+	
+	class DestinationsIterator{
+		- String[] destinations
+		- int position
+		+DestinationsIterator(String[] destinations)
+		+ void first()
+		+ void next()
+		+ boolean isDone()
+		+ Object currentItem()
+	}
+	
+	
+	
+	Iterable <|-- Destinations
+	Iterator <|-- DestinationsIterator
+	DestinationsIterator <.right. Destinations
+	Iterator <-right- IteratorMain
+	Iterable <-left- IteratorMain
+	Destinations <-left- DestinationsIterator
+	
+@enduml
