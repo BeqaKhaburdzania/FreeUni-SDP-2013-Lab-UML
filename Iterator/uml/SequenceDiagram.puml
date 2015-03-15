@@ -1,0 +1,29 @@
+@startuml
+
+	actor main
+	
+	create Destinations
+   	main -> Destinations : new
+   	create ArrayList
+   	Destinations -> ArrayList
+   	
+   	main -> Destinations : add(value)
+   	activate Destinations
+   	
+   	Destinations -> ArrayList : add(value)
+    deactivate Destinations
+    
+   	main -> Destinations : createIterator()
+   	activate Destinations
+   	create Iterator
+	Destinations -> Iterator : new
+	Destinations -> main : Iterator
+	deactivate Destinations
+	
+	loop !Iterator : isDone()
+		main -> Iterator : currentItem()
+		Iterator --> main : String
+		main -> Iterator : next()
+	end
+
+@enduml

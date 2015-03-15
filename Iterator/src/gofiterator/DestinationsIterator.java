@@ -1,14 +1,16 @@
 package gofiterator;
 
+import java.util.ArrayList;
+
 public class DestinationsIterator implements Iterator{
-	private String[] destinations;
+	private ArrayList<String> destinations;
 	private int position = 0;
 	
 	/**
 	 * Public constructor of DestinationsIterator.
-	 * @param destinations array to iterate
+	 * @param destinations array list to iterate
 	 */
-	public DestinationsIterator(String[] destinations){
+	public DestinationsIterator(ArrayList<String> destinations){
 		this.destinations = destinations;
 	}
 
@@ -24,7 +26,7 @@ public class DestinationsIterator implements Iterator{
 
 	@Override
 	public boolean isDone() {
-		if (position >= destinations.length)
+		if (position >= destinations.size())
 			return true;
 		return false;
 	}
@@ -38,7 +40,7 @@ public class DestinationsIterator implements Iterator{
 				e.printStackTrace();
 			}
 		}
-		return destinations[position];
+		return destinations.get(position);
 	}
 
 }

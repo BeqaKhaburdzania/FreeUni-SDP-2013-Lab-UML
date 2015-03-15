@@ -3,7 +3,7 @@ package gofiterator;
 public class IteratorMain {
 	
 	public static void main(String[] args) {
-		Destinations destinations = new Destinations(7);
+		Destinations destinations = new Destinations();
 		
 		destinations.add("Santiago");
 		destinations.add("Buenos Aires");

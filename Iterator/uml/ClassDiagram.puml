@@ -18,18 +18,15 @@
 	}
 	
 	class Destinations{
-		- String[] destinations
-		- int internal_index
-		- int maxNumberOfDestinations
-		+ Destinations(int maxNumberOfDestinations)
+		- ArrayList<String> destinations
 		+ void add(String value)
 		+ Iterator createIterator()
 	}
 	
 	class DestinationsIterator{
-		- String[] destinations
+		- ArrayList<String> destinations
 		- int position
-		+DestinationsIterator(String[] destinations)
+		+ DestinationsIterator(ArrayList<String> destinations)
 		+ void first()
 		+ void next()
 		+ boolean isDone()
