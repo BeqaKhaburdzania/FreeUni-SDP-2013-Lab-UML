@@ -1,0 +1,23 @@
+@startuml
+	actor main
+	main -> Scanner : new
+	main-> ProductFactory: new
+
+	
+	loop name!=Exit
+		main -> Scanner : nextLine()
+		Scanner --> main : String(name)
+		main->ProductFactory : getProductByName(name)
+		alt name == Meat	
+            ProductFactory -> Meat:new
+        else name == Cheese
+        	ProductFactory -> Cheese:new
+        else 	
+        	ProductFactory -> NullObject:new
+        ProductFactory --> main : Product(prod)
+    	end
+    	main->Product:prod.getProductInfo()
+    	Product --> main : String(info)
+    end
+	
+@enduml

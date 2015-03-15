@@ -1,0 +1,50 @@
+@startuml
+	 interface Product{
+		+getProductInfo(): String
+		+getName():String
+	 }
+	 hide Product fields
+	 class Meat{
+	 	-name:String
+	 	-price:int
+	 	#Meat(int price)
+	 	+getProductInfo(): String
+	 	+getName():String
+	 }
+	 
+	 class Cheese{
+	 	-name:String
+	 	-price:int
+	 	#Cheese(int price)
+	 	+getProductInfo(): String
+	 	+getName():String
+	 }
+	  class NullObject{
+	 	-name:String
+	  	#NullObject()
+	 	+getProductInfo(): String
+	 	+getName():String
+	 }
+	 class ProductFactory{
+	 	#ProductFactory()
+	 	+getProductByName(String name):Product
+	 	+ {static}MEAT_PRICE:int
+	 	+ {static}CHEESE_PRICE:int
+	 }
+	 class Program{
+		+ {static} void main(String[] args)	 
+	 }
+	 hide Program fields
+	 Product <|.. Meat
+	 Product <|.. Cheese
+	 Product <|.. NullObject
+	 ProductFactory -up-> Meat
+	 ProductFactory -up-> Cheese
+	 ProductFactory -up-> NullObject
+	 Program -up-> Meat
+	 Program -up-> Cheese
+	 Program -up-> NullObject
+	 Program -up->ProductFactory
+	 
+	 
+ @enduml
