@@ -1,0 +1,76 @@
+@startuml
+
+    actor main
+	
+	 main -> Date : new
+     loop i< eventList.length
+     	main -> Math : random()
+     	alt r< 0.3	
+            main -> EventSymbol : new(string1)
+        else r < 0.6
+             main -> EventSymbol : new(string2)
+        else 
+        	main -> EventSymbol : new(string3)
+        end
+      end
+      main -> Date : new
+      main -> Date : getTime()
+      main -> Date : getTime()
+      main -> EventSymbol : new(string1)
+      main -> EventSymbol : new(string2)
+      main -> EventSymbol : new(string3)
+      main -> Date : new
+   	  loop i< eventList.length
+     	main -> EventSymbol : isEqualTo(sym1)
+     	EventSymbol --> main : Boolean(result)
+        main -> EventSymbol : isEqualTo(sym2)
+	    EventSymbol --> main : Boolean(result2) 
+	    main -> EventSymbol : isEqualTo(sym3)
+	    EventSymbol --> main : Boolean(result3) 
+     	alt result	
+     		
+        else result2
+	    else result3
+        	
+        end
+      end
+      main -> Date : new
+      main -> Date : getTime()
+      main -> Date : getTime()
+      loop i< eventList.length
+       main -> Math : random()
+     	alt r< 0.3	
+            main -> EventSymbolFactory : newEventSymbol(string1)
+            EventSymbolFactory --> main : EventSymbol(symbol1)
+        else r < 0.6
+              main -> EventSymbolFactory : newEventSymbol(string2)
+              EventSymbolFactory --> main : EventSymbol(symbol2)
+        else 
+        	 main -> EventSymbolFactory : newEventSymbol(string3)
+        	 EventSymbolFactory --> main : EventSymbol(symbol3)
+        end
+      end
+      main -> Date : new
+      main -> Date : getTime()
+      main -> Date : getTime()
+      main -> EventSymbolFactory : newEventSymbol(string1)
+      EventSymbolFactory --> main : EventSymbol(event1) 
+      main -> EventSymbolFactory : newEventSymbol(string2)
+      EventSymbolFactory --> main : EventSymbol(event2)
+      main -> EventSymbolFactory : newEventSymbol(string3)
+      EventSymbolFactory --> main : EventSymbol(event3)
+      main -> Date : new
+      loop i< eventList.length
+     	
+     	alt eventList[i]==event1
+     		
+        else eventList[i]==event2
+	    else eventList[i]==event3
+	   	end
+	   end
+	  main -> Date : new 
+      main -> Date : getTime()
+      main -> Date : getTime()
+ 
+
+@enduml
