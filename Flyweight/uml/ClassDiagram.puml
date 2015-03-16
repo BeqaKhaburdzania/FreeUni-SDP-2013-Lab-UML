@@ -1,0 +1,31 @@
+@startuml
+	class EventSymbol {
+		-String name
+		+EventSymbol(String name)
+		+String getName()
+		+void print(String owner)
+		+boolean isEqualTo(EventSymbol otherEvent)
+	}
+	
+	class EventSymbolFactory {
+		-Hashtable<String,EventSymbol> events
+		+EventSymbol newEventSymbol(String evnt)
+	}
+	
+	class FlyweightComparisonExample {
+		+void main(String[] arghssss)
+	}
+	
+	FlyweightComparisonExample  --> EventSymbolFactory
+	FlyweightComparisonExample  *-- EventSymbol
+	EventSymbolFactory *--> EventSymbol
+	
+	
+	
+
+	
+	
+	note "if EventSymbols[key] exists: \n  return existing EventSymbol \nelse: \n  create new EventSymbol\n  add to pool of EvenSymbols\n  return new EventSymbol " as N1	
+	
+	EventSymbolFactory .. N1
+@enduml
