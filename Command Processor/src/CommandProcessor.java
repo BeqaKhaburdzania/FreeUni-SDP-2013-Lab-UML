@@ -23,7 +23,6 @@ public class CommandProcessor {
 	
 	public void undoLastCommand(){
 		if(cmds.isEmpty()){
-			System.out.println("bla");
 			return;
 		}
 		AbstractCommand cmd = cmds.pop();
