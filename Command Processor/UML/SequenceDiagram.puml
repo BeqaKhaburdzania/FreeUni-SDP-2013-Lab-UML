@@ -52,6 +52,7 @@ C<->B: delete(pop from stack)
 deactivate C
 
 B->A
+destroy C
 deactivate B
 
 A->User
