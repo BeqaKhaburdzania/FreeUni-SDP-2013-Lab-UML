@@ -5,17 +5,21 @@ public abstract class Bank {
     protected BankServiceOrganizer bso;
 
     /**
-     * @param index
+     * Customer arrived to the bank queue.
+     *
+     * @param index - of queue
      */
     public abstract void customerArrive(int index);
 
     /**
-     * @param index
+     * Customer ends service.
+     *
+     * @param index - of teller
      */
     public abstract void endService(int index);
 
     /**
-     *
+     * Prints out all statuses.
      */
     public abstract void showStatus();
 }
