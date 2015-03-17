@@ -1,0 +1,65 @@
+@startuml
+	
+	title Interpreter Class Diagram\n
+
+    interface BooleanExpression {
+        + boolean evaluate(Context context)
+    }
+
+    class Constant {
+        - boolean value
+        + Constant(boolean val)
+        + boolean evaluate(Context context)
+    }
+
+    class VariableExpression {
+        - String varName
+        + VariableExpression(String name)
+        + boolean evaluate(Context context)
+        + String getVarName()
+    }
+    
+    class NotExpression {
+    	- BooleanExpression operand
+        + NotExpression(BooleanExpression op)
+        + boolean evaluate(Context context)
+    }
+    
+    class OrExpression {
+    	- BooleanExpression operand1
+    	- BooleanExpression operand2
+        + NotExpression(BooleanExpression op1, BooleanExpression op2)
+        + boolean evaluate(Context context)
+    }
+    
+    class AndExpression {
+        - BooleanExpression operand1
+    	- BooleanExpression operand2
+        + AndExpression(BooleanExpression op1, BooleanExpression op2)
+        + boolean evaluate(Context context)
+    }
+
+    class Context {
+        - Hashtable vars
+        + Context()
+        + void assign(VariableExpression var, boolean value)
+        + boolean lookup(String varName)
+    }
+
+    class InterpreterExample {
+        {static} void main(String[] args)
+    }
+    
+    BooleanExpression          <|-- Constant
+    BooleanExpression          <|-- VariableExpression
+    BooleanExpression          <|-- NotExpression
+    BooleanExpression          <|-- OrExpression
+    BooleanExpression          <|-- AndExpression
+    NotExpression o--> BooleanExpression
+    OrExpression o--> BooleanExpression
+    AndExpression o--> BooleanExpression
+    VariableExpression o--> Context
+    InterpreterExample --> Context
+    InterpreterExample --> BooleanExpression
+
+@enduml
