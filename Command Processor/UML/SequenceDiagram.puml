@@ -1,14 +1,16 @@
 @startuml
-	hide footbox
-	title Command Processor
-    actor User
-	participant "Controller" as A
-	participant "CommandProcessor" as B
-	participant "UpperCaseLetter" as C
-	participant "Supplier" as D
+
+hide footbox
+title Command Processor
+actor User
+participant "Controller" as A
+participant "CommandProcessor" as B
+participant "UpperCaseLetter" as C
+participant "Supplier" as D
 
 User -> A: Request
 activate A
+
 create C
 A<->C
 
@@ -25,8 +27,10 @@ deactivate D
 
 C->B
 deactivate C
+
 B->A
 deactivate B
+
 A->User
 
 User -> A: Undo request
@@ -46,8 +50,11 @@ deactivate D
 C->B
 C<->B: delete(pop from stack)
 deactivate C
+
 B->A
 deactivate B
+
 A->User
 deactivate A
+
 @enduml
