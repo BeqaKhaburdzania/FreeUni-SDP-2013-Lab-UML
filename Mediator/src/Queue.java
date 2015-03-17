@@ -3,14 +3,16 @@ public class Queue extends BankEntity {
     private int size;
 
     /**
-     * @param bo
+     * Initialises new bank queue.
+     *
+     * @param bo - bank service organiser
      */
     public Queue(BankServiceOrganizer bo) {
         super(bo);
     }
 
     /**
-     *
+     * Dequeue client.
      */
     public void dequeue() {
         if (size > 0)
@@ -18,7 +20,7 @@ public class Queue extends BankEntity {
     }
 
     /**
-     *
+     * Enqueue client.
      */
     public void enqueue() {
         size++;
@@ -26,7 +28,9 @@ public class Queue extends BankEntity {
     }
 
     /**
-     * @return
+     * Returns size of bank queue.
+     *
+     * @return size of queue
      */
     public int getSize() {
         return size;

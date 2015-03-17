@@ -1,7 +1,7 @@
 
 public class MediatorExample {
     public static void main(String[] args) {
-        LittleBank bank = new LittleBank();
+        Bank bank = new LittleBank();
 
         bank.showStatus();
 
