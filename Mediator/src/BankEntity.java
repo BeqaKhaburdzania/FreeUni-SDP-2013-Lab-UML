@@ -2,10 +2,17 @@
 public abstract class BankEntity {
     BankServiceOrganizer bOrganizer;
 
-    public BankEntity(BankServiceOrganizer bo) {
-        bOrganizer = bo;
+    /**
+     *
+     * @param bankServiceOrganizer
+     */
+    public BankEntity(BankServiceOrganizer bankServiceOrganizer) {
+        this.bOrganizer = bankServiceOrganizer;
     }
 
+    /**
+     *
+     */
     public void changed() {
         bOrganizer.entityChanged(this);
     }

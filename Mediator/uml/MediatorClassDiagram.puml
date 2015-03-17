@@ -52,4 +52,6 @@ class Teller extends BankEntity {
     + boolean isFree()
 }
 
+MediatorExample -> LittleBank
+
 @enduml

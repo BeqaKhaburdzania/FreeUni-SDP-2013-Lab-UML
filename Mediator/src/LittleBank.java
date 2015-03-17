@@ -6,10 +6,13 @@ public class LittleBank {
     public LittleBank() {
         LittleBankServiceOrganizer lbso = new LittleBankServiceOrganizer();
         lbso.createBankEntities();
-        queue1 = lbso.getQueue1();
-        queue2 = lbso.getQueue2();
-        teller1 = lbso.getTeller1();
-        teller2 = lbso.getTeller2();
+        System.out.println("----------------------");
+        System.out.println("Queue number: " + lbso.getQueueNumber());
+        System.out.println("Teller number: " + lbso.getTellerNumber());
+        queue1 = lbso.getQueue(1);
+        queue2 = lbso.getQueue(2);
+        teller1 = lbso.getTeller(1);
+        teller2 = lbso.getTeller(2);
     }
 
     public void customerArriveToQ1() {
