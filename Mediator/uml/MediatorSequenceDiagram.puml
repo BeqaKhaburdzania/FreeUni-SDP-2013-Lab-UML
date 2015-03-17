@@ -1,7 +1,52 @@
 @startuml
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+actor main
+
+create LittleBank
+main -> LittleBank : new()
+
+create LittleBankServiceOrganizer
+
+LittleBank -> LittleBankServiceOrganizer : new()
+
+LittleBank -> LittleBankServiceOrganizer : createBankEntities()
+
+activate LittleBankServiceOrganizer
+
+loop
+
+    create Queue
+    LittleBankServiceOrganizer -> Queue : new(this)
+
+end
+
+loop
+
+    create Teller
+    LittleBankServiceOrganizer -> Teller : new(this)
+
+end
+
+deactivate LittleBankServiceOrganizer
+
+LittleBank -> LittleBankServiceOrganizer : getQueueNumber()
+
+activate LittleBankServiceOrganizer
+
+LittleBank <-- LittleBankServiceOrganizer
+
+deactivate LittleBankServiceOrganizer
+
+LittleBank -> LittleBankServiceOrganizer : getTellerNumber()
+
+activate LittleBankServiceOrganizer
+
+LittleBank <-- LittleBankServiceOrganizer
+
+deactivate LittleBankServiceOrganizer
+
+main -> LittleBank : showStatus()
+
+
+
 @enduml
