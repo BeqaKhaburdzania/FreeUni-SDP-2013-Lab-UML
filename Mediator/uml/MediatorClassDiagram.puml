@@ -26,14 +26,17 @@ class LittleBank {
 }
 
 class LittleBankServiceOrganizer implements BankServiceOrganizer {
-    - Queue queue1, queue2
-    - Teller teller1, teller2
+    -{static} int QUEUES = 2, TELLERS = 2;
+    - ArrayList<Queue> queues;
+    - ArrayList<Teller> tellers;
+
+    + LittleBankServiceOrganizer()
+    + int getQueueNumber()
+    + int getTellerNumber()
+    + Queue getQueue(int index)
+    + Teller getTeller(int index)
     + void createBankEntities()
-    + void entityChanged(BankEntity be)
-    + Queue getQueue1()
-    + Queue getQueue2()
-    + Teller getTeller1()
-    + Teller getTeller2()
+    + void entityChanged(BankEntity bankEntity)
 }
 
 class Queue extends BankEntity {
