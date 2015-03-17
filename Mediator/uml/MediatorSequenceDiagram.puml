@@ -47,6 +47,52 @@ deactivate LittleBankServiceOrganizer
 
 main -> LittleBank : showStatus()
 
+activate LittleBank
 
+    LittleBank -> LittleBankServiceOrganizer : getTellerNumber()
+
+    activate LittleBankServiceOrganizer
+
+    LittleBank <-- LittleBankServiceOrganizer
+
+    deactivate LittleBankServiceOrganizer
+
+    loop
+
+        LittleBank -> LittleBankServiceOrganizer : getTeller(i)
+        activate LittleBankServiceOrganizer
+            LittleBank <-- LittleBankServiceOrganizer
+        deactivate LittleBankServiceOrganizer
+
+        LittleBank -> Teller : isFree()
+        activate Teller
+            LittleBank <-- Teller
+        deactivate Teller
+
+    end
+
+    LittleBank -> LittleBankServiceOrganizer : getQueueNumber()
+
+    activate LittleBankServiceOrganizer
+
+    LittleBank <-- LittleBankServiceOrganizer
+
+    deactivate LittleBankServiceOrganizer
+
+    loop
+
+        LittleBank -> LittleBankServiceOrganizer : getQueue(i)
+        activate LittleBankServiceOrganizer
+            LittleBank <-- LittleBankServiceOrganizer
+        deactivate LittleBankServiceOrganizer
+
+        LittleBank -> Queue : getSize()
+        activate Queue
+            LittleBank <-- Teller
+        deactivate Queue
+
+    end
+
+deactivate LittleBank
 
 @enduml
