@@ -1,0 +1,89 @@
+@startuml
+
+AbstractCommand <|.. UpperCaseLetter
+AbstractCommand <|.. LowerCaseLetter
+AbstractCommand <|.. DeleteCommand
+
+DeleteCommand--Controller
+LowerCaseLetter--Controller
+UpperCaseLetter--Controller
+
+DeleteCommand--Supplier
+LowerCaseLetter--Supplier
+UpperCaseLetter--Supplier
+
+CommandProcessor o--AbstractCommand
+
+interface AbstractCommand {
+	void execute()
+	void undo()
+	CommandType getType()
+	String getName()
+}
+
+class DeleteCommand {
+	~EditText editText
+	~int startIndex
+	~int endIndex
+	~String removedTxt
+	~CommandType cmdType
+	+DeleteCommand(EditText editText, int start, int end, CommandType cmdType)
+	+void execute()
+	+void undo()
+	+CommandType getType()
+	+String getName()
+}
+
+class LowerCaseLetter {
+	~EditText editText
+	~CommandType cmdType
+	~int index
+	+LowerCaseLetter(EditText editText, int index, CommandType cmdType)
+	+void execute()
+	+void undo()
+	+CommandType getType()
+	+String getName()
+}
+
+class UpperCaseLetter {
+	~EditText editText
+	~CommandType cmdType
+	~int index
+	+UpperCaseLetter(EditText editText, int index, CommandType cmdType)
+	+void execute()
+	+void undo()
+	+CommandType getType()
+	+String getName()
+}
+
+class CommandProcessor {
+	~Stack<AbstractCommand> cmds
+	+CommandProcessor()
+	+void executeCommand(AbstractCommand cmd)
+	+void undoLastCommand()
+	+void redoLastCommand()
+}
+
+class Supplier {
+	~String text
+	+Supplier(String text)
+	+String getSelectedText(int start, int end)
+	+String deleteText(int start, int end)
+	+String getString(int start, String removed)
+	+String upperCaseText(int index)
+	+String lowerCaseText(int index)
+}
+
+class Controller {
+	~CommandProcessor cmdProcessor
+	+Controller()
+	+void callUndo()
+	+void callRedo()
+	+void deletePressed(EditText text, int start, int end, CommandType cmdType)
+	+void upperCasePressed(EditText text, int index, CommandType cmdType)
+	+void lowerCasePressed(EditText text, int index, CommandType cmdType)
+}
+
+CommandProcessor--Controller
+
+@enduml
