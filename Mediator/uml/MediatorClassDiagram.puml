@@ -55,6 +55,10 @@ class Teller extends BankEntity {
     + boolean isFree()
 }
 
-MediatorExample -> LittleBank
+MediatorExample --> LittleBank
+LittleBank -> LittleBankServiceOrganizer
+LittleBankServiceOrganizer -> Queue
+LittleBankServiceOrganizer -> Teller
+BankEntity -Left-> BankServiceOrganizer
 
 @enduml

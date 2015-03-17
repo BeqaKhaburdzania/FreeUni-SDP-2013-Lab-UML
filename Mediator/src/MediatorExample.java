@@ -5,36 +5,44 @@ public class MediatorExample {
 
         bank.showStatus();
 
-        System.out.println("A customer arrives to queue 1");
-        bank.customerArriveToQ1();
+        System.out.println("    A customer arrives to queue 1");
+//        bank.customerArriveToQ1();
+        bank.customerArrive(1);
         bank.showStatus();
 
-        System.out.println("A customer arrives to queue 1");
-        bank.customerArriveToQ1();
+        System.out.println("    A customer arrives to queue 1");
+//        bank.customerArriveToQ1();
+        bank.customerArrive(1);
         bank.showStatus();
 
-        System.out.println("A customer arrives to queue 1");
-        bank.customerArriveToQ1();
+        System.out.println("    A customer arrives to queue 1");
+//        bank.customerArriveToQ1();
+        bank.customerArrive(1);
         bank.showStatus();
 
-        System.out.println("A customer arrives to queue 2");
-        bank.customerArriveToQ2();
+        System.out.println("    A customer arrives to queue 2");
+//        bank.customerArriveToQ2();
+        bank.customerArrive(2);
         bank.showStatus();
 
-        System.out.println("End of service Teller 1");
-        bank.endServiceTeller1();
+        System.out.println("    End of service Teller 1");
+//        bank.endServiceTeller1();
+        bank.endService(1);
         bank.showStatus();
 
-        System.out.println("End of service Teller 2");
-        bank.endServiceTeller2();
+        System.out.println("    End of service Teller 2");
+//        bank.endServiceTeller2();
+        bank.endService(2);
         bank.showStatus();
 
-        System.out.println("End of service Teller 2");
-        bank.endServiceTeller2();
+        System.out.println("    End of service Teller 2");
+//        bank.endServiceTeller2();
+        bank.endService(2);
         bank.showStatus();
 
-        System.out.println("End of service Teller 1");
-        bank.endServiceTeller1();
+        System.out.println("    End of service Teller 1");
+//        bank.endServiceTeller1();
+        bank.endService(1);
         bank.showStatus();
     }
 }
