@@ -1,0 +1,67 @@
+@startuml
+
+title Memento pattern
+
+class Main{
+    +{static}main(String[] args) :void
+}
+
+class Caretaker{
+    -textBox :String
+    -undoStack :Stack<TextBoxMementoInterface>
+    -canUndo() :boolean
+    +snapshot() :void
+    +undo() :void
+    +getDescription() :String
+}
+class TextBox{
+    -text :String
+    -caretPosition :int
+    -selection :Selection
+    +setText(String text) :void
+    +getText() :String
+    +moveCaretBy(int offset) :void
+    +moveCaretTo(int position) :void
+    +getCaretPosition() :int
+    +select(Selection select) :void
+    +getSelection() :Selection
+}
+
+class Selection{
+    -start :int
+    -length :int
+    +setStart() :void
+    +getStart() :int
+    +setLength() :void
+    +getLength() :int
+    +includes(int index) :boolean
+    +{static}getEmpty() :Selection
+}
+interface TextBoxMementoInterface{
+    +getDescription() :String
+}
+class TextBoxMemento{
+    -text :String
+    -caretPosition :int
+    -selection :Selection
+    +getText() :String
+    +getCaretPosition() :int
+    +getSelection() :Selection
+}
+
+
+class IncompatibleMementoException{
+
+}
+
+Main -right--> Caretaker
+Caretaker -right---> TextBoxMementoInterface
+Caretaker -up-> TextBox
+Main -down-> TextBox
+Main --> Selection
+TextBoxMemento -left-> IncompatibleMementoException
+
+TextBoxMemento <|--up TextBoxMementoInterface
+
+
+@enduml

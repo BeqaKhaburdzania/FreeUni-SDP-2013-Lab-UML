@@ -1,0 +1,24 @@
+@startuml
+actor Main
+
+create TextBox
+main -> TextBox :new
+main -> TextBox :setText()
+main -> TextBox :select(Selection);
+main -> TextBox :moveCaretBy(int)
+
+create Caretaker
+main -> Caretaker :new
+main -> Caretaker :snapshot
+main -> Caretaker :undo
+
+
+Caretaker -> TextBox :createMemento
+Caretaker -> TextBox :applyMemento
+
+
+create Memento
+TextBox -> Memento :new
+
+
+@enduml

@@ -6,28 +6,28 @@ public class Main {
     public static void main(String args[]){
         TextBox textBox = new TextBox();
         Caretaker caretaker = new Caretaker(textBox);
-        System.out.println("························ Initialize");
+        System.out.println("------------------------ Initialize");
         textBox.setText("Hello world!");
-        System.out.println("························ Selection 3 -> 3");
+        System.out.println("------------------------ Selection 3 -> 3");
         textBox.select(new Selection(3, 3));
         textBox.moveCaretBy(2);
 
         System.out.println(textBox.getText());
         caretaker.snapshot();
-        System.out.println("························ Snapshot");
+        System.out.println("------------------------ Snapshot");
         System.out.println(caretaker.getDescription());
 
-        System.out.println("························ Edit");
+        System.out.println("------------------------ Edit");
         textBox.setText("Good bye world!");
-        System.out.println("························ Selection 4 -> 4");
+        System.out.println("------------------------ Selection 4 -> 4");
         textBox.select(new Selection(4,5));
         textBox.moveCaretBy(8);
         System.out.println(textBox.getText());
         caretaker.snapshot();
-        System.out.println("························ Snapshot");
+        System.out.println("------------------------ Snapshot");
         System.out.println(caretaker.getDescription());
 
-        System.out.println("························ Edit");
+        System.out.println("------------------------ Edit");
         textBox.setText("Foo");
         System.out.println(textBox.getText());
         try {
@@ -35,14 +35,14 @@ public class Main {
         }catch (Exception e){
             System.out.println(ERROR_MESSAGE);
         }
-        System.out.println("························ Undo");
+        System.out.println("------------------------ Undo");
         System.out.println(textBox.getText());
         try {
             caretaker.undo();
         }catch (Exception e){
             System.out.println(ERROR_MESSAGE);
         }
-        System.out.println("························ Undo");
+        System.out.println("------------------------ Undo");
         System.out.println(textBox.getText());
 
         try {
