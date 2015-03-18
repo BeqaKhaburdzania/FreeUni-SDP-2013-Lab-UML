@@ -1,34 +1,31 @@
-// Computer assisted translation from c# by CS2J (http://www.cs2j.com)
-// Original sources are published under Microsoft Public License (Ms-PL) at csharpdesignpatterns.codeplex.com
+import java.util.Stack;
+
 // (c) 2013 Jason Oliveira, George Mamaladze
-
-import java.util.*;
-
-public class Caretaker   
-{
-    private final TextBox m_TextBox;
-    private final Stack<IMemento> m_UndoStack = new Stack<IMemento>();
-    public Caretaker(TextBox textBox) throws Exception {
-        m_TextBox = textBox;
+public class Caretaker {
+    private final TextBox textBox;
+    private final Stack<TextBoxMementoInterface> undoStack = new Stack<TextBoxMementoInterface>();
+    public Caretaker(TextBox textBox){
+        this.textBox = textBox;
     }
 
-    public void snapshot() throws Exception {
-        IMemento memento = m_TextBox.createMemento();
-        m_UndoStack.push(memento);
+    public void snapshot(){
+        TextBoxMementoInterface memento = textBox.createMemento();
+        undoStack.push(memento);
     }
 
     public void undo() throws Exception {
         if (!canUndo())
             throw new IllegalStateException("Undo stack is empty.");
-         
-        IMemento memento = m_UndoStack.pop();
-        m_TextBox.applyMemento(memento);
+
+        TextBoxMementoInterface memento = undoStack.pop();
+        textBox.applyMemento(memento);
     }
 
-    private boolean canUndo() throws Exception {
-        return m_UndoStack.size() != 0;
+    private boolean canUndo(){
+        return undoStack.size() != 0;
     }
 
+    public String getDescription(){
+        return undoStack.peek().getDescription();
+    }
 }
-
-
