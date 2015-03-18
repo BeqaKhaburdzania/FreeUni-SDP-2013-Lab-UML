@@ -1,8 +1,7 @@
 
-
 import java.util.ArrayList;
 
-//it is also mediator
+
 public class ViewHandler {
 	
 	private ArrayList<AbstractView> views;

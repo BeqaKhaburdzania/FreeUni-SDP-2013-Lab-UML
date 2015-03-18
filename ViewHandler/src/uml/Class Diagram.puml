@@ -1,0 +1,85 @@
+@startuml
+
+title View Handler
+
+
+class Test {
+	+void main(String[] args)
+}
+
+class ViewHandler {
+	-ArrayList<AbstractView> views
+	+ViewHandler()
+	+void openView(AbstractView view)
+	+void closeView(AbstractView view)
+	+void top(AbstractView view)
+	+void resize(AbstractView view)
+	+void update(AbstractView view)
+	+void move(AbstractView view)
+	+void tile()
+}
+
+abstract class AbstractView {
+	#String name
+	+String init()
+	+String resize()
+	+String update()
+	+void setName(String name)
+	+String getName()
+	+String open()
+	+String close()
+	+String move()
+}
+
+class ChatView {
+	~ChatViewSupplier sup
+	+ChatView()
+	+String init()
+	+String resize()
+	+String update()
+}
+abstract class AbstractView {
+}
+AbstractView <|-- ChatView
+
+
+class VideoView {
+	~VideoViewSupplier sup
+	+VideoView()
+	+String init()
+	+String resize()
+	+String update()
+}
+abstract class AbstractView {
+}
+AbstractView <|-- VideoView
+
+interface ViewSupplier {
+	String resizeOptions()
+	String updateOptions()
+}
+
+
+class VideoViewSupplier {
+	+String resizeOptions()
+	+String updateOptions()
+}
+
+ViewSupplier <|.. VideoViewSupplier
+
+class ChatViewSupplier {
+	+String resizeOptions()
+	+String updateOptions()
+}
+
+ViewSupplier <|.. ChatViewSupplier
+
+Test  --> ViewHandler
+ViewHandler --> AbstractView
+
+ChatView --> ChatViewSupplier
+VideoView --> VideoViewSupplier
+
+ 
+
+@enduml
