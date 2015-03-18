@@ -18,8 +18,8 @@ public class Test {
 		vh.update(myVideo);
 		vh.update(myChat);
 		
-		vh.resize(myVideo);
-		vh.resize(myChat);
+//		vh.resize(myVideo);
+//		vh.resize(myChat);
 		
 		vh.closeView(myVideo);
 		vh.closeView(myChat);

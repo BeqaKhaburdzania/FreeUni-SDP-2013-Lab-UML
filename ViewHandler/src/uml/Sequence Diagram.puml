@@ -1,0 +1,51 @@
+@startuml
+
+actor main
+
+main -> ViewHandler: new
+
+main -> ChatView: new
+ChatView --> ChatViewSupplier: new
+main -> ChatView: setName
+main -> ViewHandler: openView
+ViewHandler -> ChatView: init
+ViewHandler -> ViewHandler: add
+ViewHandler -> ChatView: open
+
+main -> VideoView: new
+VideoView --> VideoViewSupplier: new
+main -> VideoView: setName
+main -> ViewHandler: openView
+ViewHandler -> VideoView: init
+ViewHandler -> ViewHandler: add
+ViewHandler -> VideoView: open
+
+main -> ViewHandler: move
+ViewHandler -> ChatView: move
+
+main -> ViewHandler: move
+ViewHandler --> VideoView: move
+
+main -> ViewHandler: update
+ViewHandler -> VideoView: update
+VideoView --> VideoViewSupplier: updateOptions
+
+main -> ViewHandler: update
+ViewHandler -> ChatView: update
+ChatView --> ChatViewSupplier: updateOptions
+
+main -> ViewHandler: closeView
+ViewHandler -> VideoView: close
+ViewHandler -> ViewHandler: remove
+main <- ViewHandler: 
+
+
+main -> ViewHandler: closeView
+ViewHandler -> ChatView: close
+ViewHandler -> ViewHandler: remove
+main <- ViewHandler: 
+
+
+
+
+@enduml
