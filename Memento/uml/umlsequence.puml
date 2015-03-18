@@ -2,15 +2,15 @@
 actor Main
 
 create TextBox
-main -> TextBox :new
-main -> TextBox :setText()
-main -> TextBox :select(Selection);
-main -> TextBox :moveCaretBy(int)
+Main -> TextBox :new
+Main -> TextBox :setText()
+Main -> TextBox :select(Selection);
+Main -> TextBox :moveCaretBy(int)
 
 create Caretaker
-main -> Caretaker :new
-main -> Caretaker :snapshot
-main -> Caretaker :undo
+Main -> Caretaker :new
+Main -> Caretaker :snapshot
+Main -> Caretaker :undo
 
 
 Caretaker -> TextBox :createMemento
