@@ -2,27 +2,29 @@
 
 actor main
 
-create LittleBank
+create LittleBank << (C,#ADD1B2) >>
 main -> LittleBank : new()
 
-create LittleBankServiceOrganizer
+create LittleBankServiceOrganizer << (C,#ADD1B2) >>
 
 LittleBank -> LittleBankServiceOrganizer : new()
 
 LittleBank -> LittleBankServiceOrganizer : createBankEntities()
 
+create BankEntity << (A,#A9DCDF) >>
+
 activate LittleBankServiceOrganizer
 
 loop
 
-    create Queue
+    create Queue << (C,#ADD1B2) >>
     LittleBankServiceOrganizer -> Queue : new(this)
 
 end
 
 loop
 
-    create Teller
+    create Teller << (C,#ADD1B2) >>
     LittleBankServiceOrganizer -> Teller : new(this)
 
 end
@@ -61,12 +63,16 @@ activate LittleBank
 
         LittleBank -> LittleBankServiceOrganizer : getTeller(i)
         activate LittleBankServiceOrganizer
-            LittleBank <-- LittleBankServiceOrganizer
+
+        LittleBank <-- LittleBankServiceOrganizer
+
         deactivate LittleBankServiceOrganizer
 
         LittleBank -> Teller : isFree()
         activate Teller
-            LittleBank <-- Teller
+
+        LittleBank <-- Teller
+
         deactivate Teller
 
     end
@@ -83,16 +89,166 @@ activate LittleBank
 
         LittleBank -> LittleBankServiceOrganizer : getQueue(i)
         activate LittleBankServiceOrganizer
-            LittleBank <-- LittleBankServiceOrganizer
+
+        LittleBank <-- LittleBankServiceOrganizer
+
         deactivate LittleBankServiceOrganizer
 
         LittleBank -> Queue : getSize()
         activate Queue
-            LittleBank <-- Teller
+
+        LittleBank <-- Teller
+
         deactivate Queue
 
     end
 
 deactivate LittleBank
+
+main -> LittleBank : customerArrive(1)
+
+activate LittleBank
+
+    LittleBank -> LittleBankServiceOrganizer : getQueue(i)
+    activate LittleBankServiceOrganizer
+
+    LittleBank <-- LittleBankServiceOrganizer
+
+    deactivate LittleBankServiceOrganizer
+
+    LittleBank -> Queue : enqueue()
+    activate Queue
+
+    Queue -> BankEntity : changed()
+
+    activate BankEntity
+
+    BankEntity -> LittleBankServiceOrganizer : entityChanged(this)
+
+    deactivate BankEntity
+
+    activate LittleBankServiceOrganizer
+
+        LittleBankServiceOrganizer -> LittleBankServiceOrganizer: Check case
+
+        alt Is Teller
+
+            LittleBankServiceOrganizer -> LittleBankServiceOrganizer : getQueue(index)
+
+            LittleBankServiceOrganizer -> Queue : getSize()
+            LittleBankServiceOrganizer <-- Queue
+
+            alt Size is more than zero
+
+            LittleBankServiceOrganizer -> LittleBankServiceOrganizer : getTeller(index)
+            LittleBankServiceOrganizer -> Teller : initService(queue)
+
+            activate Teller
+
+            Teller -> Queue : dequeue()
+
+            deactivate Teller
+
+            else Check another queue
+
+            LittleBankServiceOrganizer -> LittleBankServiceOrganizer : getTeller(index)
+            LittleBankServiceOrganizer -> Teller : initService(queue)
+            activate Teller
+
+            Teller -> Queue : dequeue()
+
+            deactivate Teller
+
+            end
+
+        else Is Queue
+
+            LittleBankServiceOrganizer -> LittleBankServiceOrganizer : getTeller(index)
+
+            LittleBankServiceOrganizer -> Teller : isFree()
+
+            activate Teller
+
+            LittleBankServiceOrganizer <-- Teller
+
+            deactivate Teller
+
+            alt Teller is free
+
+            LittleBankServiceOrganizer -> LittleBankServiceOrganizer : getTeller(index)
+            LittleBankServiceOrganizer -> Teller : initService(queue)
+
+            activate Teller
+
+            Teller -> Queue : dequeue()
+
+            deactivate Teller
+
+            else Check another teller
+
+            LittleBankServiceOrganizer -> LittleBankServiceOrganizer : getTeller(index)
+            LittleBankServiceOrganizer -> Teller : initService(queue)
+            activate Teller
+
+            Teller -> Queue : dequeue()
+
+            deactivate Teller
+
+            end
+
+        end
+
+    deactivate LittleBankServiceOrganizer
+
+    deactivate Queue
+
+deactivate LittleBank
+
+group Show status process is shown above
+
+main -> LittleBank : showStatus()
+
+activate LittleBank #39EE39
+deactivate LittleBank
+
+end
+
+main -> LittleBank : endService(1)
+
+activate LittleBank
+
+LittleBank -> LittleBankServiceOrganizer : getTeller(index)
+
+activate LittleBankServiceOrganizer
+
+LittleBank <-- LittleBankServiceOrganizer
+
+deactivate LittleBankServiceOrganizer
+
+LittleBank -> Teller : endService()
+
+activate Teller #39EE39
+
+group Changed process is shown above
+
+Teller -> BankEntity : changed()
+
+activate BankEntity #39EE39
+deactivate BankEntity
+
+end
+
+deactivate Teller
+
+deactivate LittleBank
+
+group Show status process is shown above
+
+main -> LittleBank : showStatus()
+
+activate LittleBank #39EE39
+deactivate LittleBank
+
+end
 
 @enduml
