@@ -7,7 +7,7 @@ public class BridgeExample {
 	public static final int COLS = 4;
 	
 	public static void main(String[] args) {
-		CompleteMatrix matrixCV = new CompleteMatrix(ROWS, COLS, new Vector<MatrixCell>());
+		Matrix matrixCV = new CompleteMatrix(ROWS, COLS, new Vector<MatrixCell>());
 		System.out.println("CompleteMatrix with Vector");
 		matrixCV.put(1, 2, 1);
 		matrixCV.put(2, 1, 2);
@@ -21,7 +21,7 @@ public class BridgeExample {
 		}
 		System.out.println();
 		
-		SparseMatrix matrixSV = new SparseMatrix(ROWS, COLS, new Vector<MatrixCell>());
+		Matrix matrixSV = new SparseMatrix(ROWS, COLS, new Vector<MatrixCell>());
 		System.out.println("SparseMatrix with Vector");
 		matrixSV.put(1, 2, 1);
 		matrixSV.put(2, 1, 2);
@@ -35,7 +35,7 @@ public class BridgeExample {
 		}
 		System.out.println();
 		
-		CompleteMatrix matrixCA = new CompleteMatrix(ROWS, COLS, new ArrayList<MatrixCell>());
+		Matrix matrixCA = new CompleteMatrix(ROWS, COLS, new ArrayList<MatrixCell>());
 		System.out.println("CompleteMatrix with ArrayList");
 		matrixCA.put(1, 2, 1);
 		matrixCA.put(2, 1, 2);
@@ -49,7 +49,7 @@ public class BridgeExample {
 		}
 		System.out.println();
 		
-		SparseMatrix matrixSA = new SparseMatrix(ROWS, COLS, new ArrayList<MatrixCell>());
+		Matrix matrixSA = new SparseMatrix(ROWS, COLS, new ArrayList<MatrixCell>());
 		System.out.println("SparseMatrix with ArrayList");
 		matrixSA.put(1, 2, 1);
 		matrixSA.put(2, 1, 2);

@@ -1,8 +1,8 @@
 
 public class VideoView extends AbstractView{
-	
+	VideoViewSupplier sup;
 	public VideoView(){
-		
+		sup = new VideoViewSupplier();
 	}
 
 	@Override
@@ -13,12 +13,14 @@ public class VideoView extends AbstractView{
 
 	@Override
 	public String resize() {
-		return name+": I definitely must start a new diet!";
+		System.out.println(sup.resizeOptions());
+		return name+": resizing, yohoo!";
 		
 	}
 
 	@Override
 	public String update() {
+		System.out.println(sup.updateOptions());
 		return name+": I smell changes...";
 		
 	}

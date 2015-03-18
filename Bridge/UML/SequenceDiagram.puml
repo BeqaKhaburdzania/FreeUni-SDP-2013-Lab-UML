@@ -1,0 +1,41 @@
+@startuml
+title Bridge Pattern Sequence Diagram
+
+actor main
+
+
+
+
+
+
+
+
+
+
+main -> Matrix : put(row, col, value)
+
+activate Matrix
+
+Matrix -> MatrixCell : new(row, col, value)
+
+Matrix -> ArrayList : put(MatrixCell)
+
+Matrix -> Vector : put(MatrixCell)
+
+
+main -> Matrix : get(row, col)
+Matrix -> ArrayList : get(row, col)
+activate ArrayList
+ArrayList --> Matrix
+deactivate ArrayList
+Matrix --> main
+
+Matrix -> Vector : get(row, col)
+activate Vector
+Vector --> Matrix
+deactivate Vector
+Matrix --> main
+
+deactivate Matrix
+
+@enduml

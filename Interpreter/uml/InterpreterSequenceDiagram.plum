@@ -1,5 +1,45 @@
 @startuml
 	
 	title Interpreter Sequence Diagram\n
+	
+	actor main
+	
+	create p.VariableExpression
+	main --> p.VariableExpression : new(p)
+	
+	create q.VariableExpression
+	main --> q.VariableExpression : new(q)
+	
+	create OrExpression
+	main --> OrExpression : new(p, q)
+	
+	create Context
+	main --> Context : new
+	
+	main -> Context : assign(p, value);
+	main -> Context : assign(q, value);
+	
+	main -> OrExpression : evaluate();
+	
+	activate OrExpression
+	OrExpression -> p.VariableExpression : evaluate();
+	
+	activate p.VariableExpression
+	p.VariableExpression -> Context : lookup()
+	Context --> p.VariableExpression : expression value
+	p.VariableExpression --> OrExpression : value
+	deactivate p.VariableExpression
+	
+	OrExpression -> q.VariableExpression : evaluate();
+	
+	activate q.VariableExpression
+	q.VariableExpression -> Context : lookup()
+	Context --> q.VariableExpression : expression value
+	q.VariableExpression --> OrExpression : value
+	deactivate q.VariableExpression
+	
+	OrExpression --> main : expression value
+	
+	deactivate OrExpression
 
 @enduml
