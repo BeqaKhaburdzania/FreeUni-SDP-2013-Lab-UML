@@ -49,6 +49,8 @@ deactivate LittleBankServiceOrganizer
 
 main -> LittleBank : showStatus()
 
+== Start of show status ==
+
 activate LittleBank
 
     LittleBank -> LittleBankServiceOrganizer : getTellerNumber()
@@ -105,7 +107,11 @@ activate LittleBank
 
 deactivate LittleBank
 
+== End of show status ==
+
 main -> LittleBank : customerArrive(1)
+
+== Start of object interaction ==
 
 activate LittleBank
 
@@ -203,6 +209,8 @@ activate LittleBank
     deactivate Queue
 
 deactivate LittleBank
+
+== End of object interaction  ==
 
 group Show status process is shown above
 
