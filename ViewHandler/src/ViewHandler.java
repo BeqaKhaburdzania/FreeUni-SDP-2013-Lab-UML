@@ -1,8 +1,9 @@
 
-
 import java.util.ArrayList;
 
-//it is also mediator
+// For example we've got a program which has chat windows and video windows.
+// each kind of window has its own particular properties and common properties.
+
 public class ViewHandler {
 	
 	private ArrayList<AbstractView> views;
