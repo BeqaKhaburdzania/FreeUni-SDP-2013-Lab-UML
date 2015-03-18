@@ -1,0 +1,14 @@
+@startuml
+
+actor Main
+
+create Button1
+Main -> Button1: new
+
+Button1 --> Server : <<Get icon from server>>
+
+create Button2
+Main -> Button2: Button1.Clone()
+
+
+@enduml
