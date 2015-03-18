@@ -14,14 +14,17 @@ interface BankServiceOrganizer {
     + void entityChanged(BankEntity be);
 }
 
-class LittleBank {
-    - Queue queue1, queue2
-    - Teller teller1, teller2
+abstract class Bank {
+    # BankServiceOrganizer bso;
+    + {abstract} void customerArrive(int index);
+    + {abstract} void endService(int index);
+    + {abstract} void showStatus();
+}
+
+class LittleBank extends Bank {
     + LittleBank()
-    + void customerArriveToQ1()
-    + void customerArriveToQ2()
-    + void endServiceTeller1()
-    + void endServiceTeller2()
+    + void customerArrive(int index)
+    + void endService(int index)
     + void showStatus()
 }
 
@@ -55,10 +58,35 @@ class Teller extends BankEntity {
     + boolean isFree()
 }
 
-MediatorExample --> LittleBank
+MediatorExample -down-> Bank
 LittleBank -> LittleBankServiceOrganizer
 LittleBankServiceOrganizer -> Queue
 LittleBankServiceOrganizer -> Teller
-BankEntity -Left-> BankServiceOrganizer
+BankEntity --Left-> BankServiceOrganizer
+
+note top of BankServiceOrganizer
+    <b>Mediator</b> - defines an interface for
+    communicating with Colleague objects.
+end note
+
+note top of BankEntity
+    <b>Colleague</b> - defines an abstract class
+    for concrete colleague classes.
+end note
+
+note bottom of LittleBankServiceOrganizer
+    <b>Concrete Mediator</b> - implements cooperative
+    behavior by coordinating Colleague objects.
+    Knows and maintains its colleagues.
+end note
+
+note as NOTE
+<b>Colleague classes</b> - each Colleague class knows its
+Mediator object. Each colleague communicates with its
+mediator whenever it would have otherwise communicated
+with another colleague.
+end note
+Queue .. NOTE
+NOTE .. Teller
 
 @enduml

@@ -1,0 +1,61 @@
+@startuml
+
+hide footbox
+title Command Processor
+actor User
+participant "Controller" as A
+participant "CommandProcessor" as B
+participant "UpperCaseLetter" as C
+participant "Supplier" as D
+
+User -> A: Request
+activate A
+
+create C
+A<->C
+
+A -> B: executeCommand
+activate B
+
+B -> C: execute
+activate C
+
+activate D
+C<->D: upperCaseText
+
+deactivate D
+
+C->B
+deactivate C
+
+B->A
+deactivate B
+
+A->User
+
+User -> A: Undo request
+
+
+A -> B: undoLastCommand
+activate B
+
+B -> C: undo
+activate C
+
+activate D
+C<->D: lowerCaseText
+
+deactivate D
+
+C->B
+C<->B: delete(pop from stack)
+deactivate C
+
+B->A
+destroy C
+deactivate B
+
+A->User
+deactivate A
+
+@enduml

@@ -1,67 +1,56 @@
-// Computer assisted translation from c# by CS2J (http://www.cs2j.com)
-// Original sources are published under Microsoft Public License (Ms-PL) at csharpdesignpatterns.codeplex.com
 // (c) 2013 Jason Oliveira, George Mamaladze
+public class TextBox {
+    private String text;
+    private int caretPosition;
+    private Selection selection;
 
-public class TextBox   
-{
-    private int m_CaretPostition = 0;
-    private Selection m_Selection;
-    private String m_Text = new String();
-    public TextBox() throws Exception {
+    public TextBox(){
         setText("");
     }
 
-    public String getText() throws Exception {
-        return m_Text;
+    public TextBox(String text){
+        setText(text);
     }
 
-    public void setText(String value) throws Exception {
-        m_Text = value;
-        m_CaretPostition = 0;
-        getSelection();
-		m_Selection = Selection.getEmpty();
+    public String getText() {
+        return text;
     }
 
-    public int getCaretPostition() throws Exception {
-        return m_CaretPostition;
+    public int getCaretPosition() {
+        return caretPosition;
     }
 
-    public Selection getSelection() throws Exception {
-        return m_Selection;
+    public Selection getSelection() {
+        return selection;
     }
 
-    public IMemento createMemento() throws Exception {
-        return new TextBoxMemento(getText(),getCaretPostition(),getSelection());
+    public void setText(String text) {
+        this.text = text;
+        caretPosition = 0;
+        selection = Selection.getEmpty();
     }
 
-    public void moveCaretBy(int offset) throws Exception {
-        m_CaretPostition = getTrimmedValue(getCaretPostition() + offset, 0, getText().length());
+    public void moveCaretBy(int offset){
+        caretPosition = getTrimmedValue(getCaretPosition() + offset, 0, getText().length());
     }
 
-    public void moveCaretTo(int position) throws Exception {
-        m_CaretPostition = getTrimmedValue(position, 0, getText().length());
+    public void moveCaretTo(int position){
+        caretPosition = getTrimmedValue(position, 0, getText().length());
     }
 
-    private int getTrimmedValue(int suggestedValue, int minValue, int maxValue) throws Exception {
-        if (suggestedValue < minValue)
-            return minValue;
-         
-        if (suggestedValue > maxValue)
-            return maxValue;
-         
-        return suggestedValue;
-    }
-
-    public void select(Selection selection) throws Exception {
+    public void select(Selection selection){
         int start = getTrimmedValue(selection.getStart(), 0, getText().length());
         int length = getTrimmedValue(selection.getLength(), 0, getText().length() - start);
-        m_Selection = new Selection(start,length);
+        selection = new Selection(start,length);
     }
 
-    public void applyMemento(IMemento memento) throws Exception {
+    public TextBoxMemento createMemento(){
+        return new TextBoxMemento(getText(), getCaretPosition(),getSelection());
+    }
+
+    public void applyMemento(TextBoxMementoInterface memento) throws Exception{
         if (memento == null)
             throw new IllegalArgumentException("memento");
-         
         TextBoxMemento textBoxMemento;
         try
         {
@@ -73,9 +62,17 @@ public class TextBox
         }
 
         setText(textBoxMemento.getText());
-        moveCaretTo(textBoxMemento.getCaretPostition());
+        moveCaretTo(textBoxMemento.getCaretPosition());
         select(textBoxMemento.getSelection());
     }
+
+    private int getTrimmedValue(int suggestedValue, int minValue, int maxValue) {
+        if (suggestedValue < minValue)
+            return minValue;
+
+        if (suggestedValue > maxValue)
+            return maxValue;
+
+        return suggestedValue;
+    }
 }
-
-

@@ -1,0 +1,75 @@
+@startuml
+
+
+abstract class CompositeSpecification {
+	+{abstract}boolean IsSatisfiedBy(T o)
+	+ISpecification<T> And(ISpecification<T> specification)
+	+ISpecification<T> Or(ISpecification<T> specification)
+	+ISpecification<T> Not(ISpecification<T> specification)
+}
+interface "ISpecification<T>" as ISpecification_T_ {
+boolean IsSatisfiedBy(T o)
+	ISpecification<T> And(ISpecification<T> specification)
+	ISpecification<T> Or(ISpecification<T> specification)
+	ISpecification<T> Not(ISpecification<T> specification)
+}
+ISpecification_T_ <|.. CompositeSpecification
+
+class AndSpecification {
+	~ISpecification<T> leftSpecification
+	~ISpecification<T> rightSpecification
+	+AndSpecification(ISpecification<T> left, ISpecification<T> right)
+	+boolean IsSatisfiedBy(T o)
+}
+CompositeSpecification <|-- AndSpecification
+
+
+class OrSpecification {
+	~ISpecification<T> leftSpecification
+	~ISpecification<T> rightSpecification
+	+OrSpecification(ISpecification<T> left, ISpecification<T> right)
+	+boolean IsSatisfiedBy(T o)
+}
+CompositeSpecification <|-- OrSpecification
+
+class NotSpecification {
+	~ISpecification<T> specification
+	+NotSpecification(ISpecification<T> spec)
+	+boolean IsSatisfiedBy(T o)
+}
+
+CompositeSpecification <|-- NotSpecification
+
+class PremiumSpecification {
+	-int cost
+	+PremiumSpecification(int cost)
+	+boolean IsSatisfiedBy(T o)
+}
+
+CompositeSpecification <|-- PremiumSpecification
+
+class Mobile {
+	-String BrandName
+	-String Type
+	-int cost
+	+Mobile(String BrandName, String Type, int cost)
+	+String getBrandName()
+	+String getType()
+	+int getCost()
+}
+
+class BrandSpecification {
+	-String BrandName
+	+BrandSpecification(String BrandName)
+	+boolean IsSatisfiedBy(T o)
+}
+CompositeSpecification <|-- BrandSpecification
+
+class TypeSpecification {
+	-String Type
+	+TypeSpecification(String Type)
+	+boolean IsSatisfiedBy(T o)
+}
+CompositeSpecification <|-- TypeSpecification
+
+@enduml

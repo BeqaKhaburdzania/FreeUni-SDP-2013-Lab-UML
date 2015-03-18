@@ -1,35 +1,32 @@
-// Computer assisted translation from c# by CS2J (http://www.cs2j.com)
-// Original sources are published under Microsoft Public License (Ms-PL) at csharpdesignpatterns.codeplex.com
 // (c) 2013 Jason Oliveira, George Mamaladze
+public class TextBoxMemento implements TextBoxMementoInterface {
+    private String text;
+    private int caretPosition;
+    private Selection selection;
+    private int uniqueId;
+    private static int uniqueIdCounter = 0;
 
-public class TextBoxMemento   implements IMemento
-{
-    private static int s_UniqueIdCounter = 1;
-    private int m_CaretPostition;
-    private final Selection m_Selection;
-    private String m_Text;
-    private int m_UniqueId;
-    public TextBoxMemento(String text, int caretPostition, Selection selection) throws Exception {
-        m_Text = text;
-        m_CaretPostition = caretPostition;
-        m_Selection = selection;
-        s_UniqueIdCounter++;
-        m_UniqueId = s_UniqueIdCounter;
+    public TextBoxMemento(String text, int position, Selection selection){
+        this.text = text;
+        this.caretPosition = position;
+        this.selection = selection;
+        uniqueId = ++uniqueIdCounter;
     }
 
-    public String getText() throws Exception {
-        return m_Text;
+    public String getText() {
+        return text;
     }
 
-    public int getCaretPostition() throws Exception {
-        return m_CaretPostition;
+    public int getCaretPosition() {
+        return caretPosition;
     }
 
-    public Selection getSelection() throws Exception {
-        return m_Selection;
+    public Selection getSelection() {
+        return selection;
     }
 
-    public String getDescription() throws Exception {
-        return String.format("Step: '%s'; Caret: %s; Selection:%s-%s", m_UniqueId, getCaretPostition(), getSelection().getStart(), getSelection().getLength());
+    @Override
+    public String getDescription() {
+        return String.format("Step: '%s'; Caret: %s; Selection:%s-%s", uniqueId, getCaretPosition(), getSelection().getStart(), getSelection().getLength());
     }
 }
