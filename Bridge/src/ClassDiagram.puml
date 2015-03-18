@@ -1,0 +1,46 @@
+@startuml
+title Bridge Pattern Class Diagram
+
+abstract class Matrix{
+	- int rows
+	- int cols
+	- Collection<MatrixCell> collection
+	# MatrixCell createPosition(int row, int col)
+	# void deletePosition(MatrixCell toDelete)
+	# MatrixCell getPosition(int row, int col)
+	+ {abstract} void put(int row, int col, int value)
+	+ {abstract} int get(int row, int col)
+	
+}
+
+interface Collection{
+	...
+}
+
+class ArrayList{
+	...
+}
+
+class Vector{
+	...
+}
+
+class CompleteMatrix{
+	~ void put(int row, int col, int value)
+	~ int get(int row, int col)
+}
+
+class SparseMatrix{
+	~ void put(int row, int col, int value)
+	~ int get(int row, int col)
+}
+
+Collection <|-- ArrayList
+Collection <|-- Vector
+
+Matrix <|-- CompleteMatrix
+Matrix <|--SparseMatrix
+
+Matrix -right-> Collection
+
+@enduml
