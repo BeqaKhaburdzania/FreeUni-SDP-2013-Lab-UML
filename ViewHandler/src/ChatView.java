@@ -1,8 +1,8 @@
 
 public class ChatView extends AbstractView {
-	
+	ChatViewSupplier sup;
 	public ChatView(){
-		
+		sup = new ChatViewSupplier();
 	}
 
 	@Override
@@ -13,13 +13,15 @@ public class ChatView extends AbstractView {
 
 	@Override
 	public String resize() {
+		System.out.println(sup.resizeOptions());
 		return name+": I was resized!";
 		
 	}
 
 	@Override
 	public String update() {
-		return name+ ": Somebody updated me!";
+		System.out.println(sup.updateOptions());
+		return name+ ": Who is here?!";
 		
 	}
 

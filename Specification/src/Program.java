@@ -5,6 +5,8 @@ public class Program {
 
 	public static void main(String[] args) {
 		
+		ISpecification<Mobile> BrSpec = new BrandSpecification<Mobile>("samsung");
+		ISpecification<Mobile> TpSpec = new TypeSpecification<Mobile>("Smart");
 		Mobile samsung = new Mobile("samsung", "Smart", 500);
 		Mobile htc = new Mobile("htc", "Smart", 420);
 		Mobile apple = new Mobile("apple", "Smart", 942);
@@ -14,17 +16,9 @@ public class Program {
 		mobiles.add(htc);
 		mobiles.add(apple);
 		mobiles.add(samsung2);
-		ISpecification<Mobile> CostSpec = new PremiumSpecification<Mobile>(480);
-		ISpecification<Mobile> BrSpec = new BrandSpecification<Mobile>("samsung");
-		ISpecification<Mobile> TpSpec = new TypeSpecification<Mobile>("Smart");
 		
-		for(int i = 0; i<mobiles.size(); i++){
-			if(!CostSpec.IsSatisfiedBy(mobiles.get(i))){
-				mobiles.remove(i);
-				i--;
-			}
-			
-		}
+		
+		
 		for(int i = 0; i<mobiles.size(); i++){
 			if((TpSpec.And(BrSpec)).IsSatisfiedBy(mobiles.get(i))){
 				mobiles.remove(i);

@@ -1,5 +1,51 @@
 @startuml
 
-	
+actor main
+
+
+create BrandSpecification
+main -> BrandSpecification : new
+
+create TypeSpecification
+main -> TypeSpecification : new
+
+create Mobile
+main -> Mobile :new
+
+
+
+main -> TypeSpecification : And(BrandSpecification)
+activate TypeSpecification
+
+create AndSpecification
+TypeSpecification -> AndSpecification : new(TypeSpecification, BrandSpecification)
+deactivate TypeSpecification
+
+main -> AndSpecification : IsSatisfiedBy(Mobile)
+activate AndSpecification
+
+AndSpecification -> TypeSpecification : IsSatisfiedBy(Mobile)
+deactivate AndSpecification
+activate TypeSpecification
+
+TypeSpecification -> Mobile : getType()
+TypeSpecification -> AndSpecification
+deactivate TypeSpecification
+activate AndSpecification
+
+AndSpecification -> BrandSpecification : IsSatisfiedBy(Mobile)
+deactivate AndSpecification
+activate BrandSpecification
+
+BrandSpecification -> Mobile : getBrand()
+BrandSpecification -> AndSpecification
+deactivate BrandSpecification
+activate AndSpecification
+AndSpecification --> main 
+
+destroy BrandSpecification
+destroy TypeSpecification
+destroy AndSpecification
+destroy Mobile
 
 @enduml
