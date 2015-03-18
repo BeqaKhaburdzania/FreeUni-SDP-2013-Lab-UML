@@ -13,7 +13,7 @@ public class Client {
 		allMenus.add(dinerMenu);
 		allMenus.add(cafeMenu);
 		
-		// add menu items here
+		//menu items
 		dinerMenu
 				.add(new MenuItem(
 						"Pasta",
@@ -24,9 +24,8 @@ public class Client {
 				"Apple pie with a flakey crust, topped with vanilla icecream",
 				true, 1.59));
 		
-		// add more menu items here
 		Waitress waitress = new Waitress(allMenus);
-		waitress.printMenu();		// TODO Auto-generated method stub
+		waitress.printMenu();
 
 	}
 	
