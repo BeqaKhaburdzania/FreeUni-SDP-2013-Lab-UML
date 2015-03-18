@@ -1,0 +1,26 @@
+@startuml
+
+interface Clonable{
+  +Clonable clone()
+}
+
+abstract class Car implements Clonable{
+ +{abstract} Car clone()
+}
+
+class CarBrandA{
+ +Car clone()
+}
+
+
+
+class DynamicallyLoadedCarBrand{
+ +Car clone()
+}
+
+Car <|-- CarBrandA
+Car <|-- DynamicallyLoadedCarBrand
+
+
+@enduml
+
