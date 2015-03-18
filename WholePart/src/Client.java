@@ -27,6 +27,7 @@ public class Client {
 		Waitress waitress = new Waitress(allMenus);
 		waitress.printMenu();
 
+		
 	}
 	
 	public static void main(String args[]) {
