@@ -13,7 +13,7 @@ public class VideoView extends AbstractView{
 
 	@Override
 	public String resize() {
-		return name+": I definitely must start a new diet!";
+		return name+": resizing, yohoo!";
 		
 	}
 

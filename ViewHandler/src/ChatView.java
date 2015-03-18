@@ -19,7 +19,7 @@ public class ChatView extends AbstractView {
 
 	@Override
 	public String update() {
-		return name+ ": Somebody updated me!";
+		return name+ ": Who is here?!";
 		
 	}
 
