@@ -1,0 +1,20 @@
+/** 
+@startuml
+	actor main
+	create Client
+	main -> Client : new 
+	main -> Client : test(song)
+	activate Client
+		create MenuComponent
+		Client -> MenuComponent :new
+		
+		create MenuComponent
+		Client -> MenuComponent :new
+		
+		Client -> MenuComponent : add(MenuComponent)
+		
+		create Waitress
+		Client -> Waitress : new(MenuComponent)
+		Client -> Waitress : printMenu
+@enduml
+*/
